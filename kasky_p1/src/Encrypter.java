@@ -1,13 +1,5 @@
 public class Encrypter {
-
-    public static void main(String[] args) {
-
-        Encrypter test = new Encrypter();
-        String encrypted = test.encrypt("1234");
-        System.out.print(encrypted);
-
-    }
-
+    
     public String encrypt(String digits) {
 
         String encrypted = "";
