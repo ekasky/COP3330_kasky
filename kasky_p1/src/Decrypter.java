@@ -1,5 +1,5 @@
 public class Decrypter {
-    
+
     public String decrypt(String digits) {
 
         String decrypted = "";
