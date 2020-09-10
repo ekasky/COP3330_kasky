@@ -1,5 +1,5 @@
 public class Encrypter {
-    
+
     public String encrypt(String digits) {
 
         String encrypted = "";
