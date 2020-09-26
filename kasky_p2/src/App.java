@@ -5,6 +5,7 @@ public class App {
     private static final Scanner input = new Scanner(System.in);
 
 
+    /*
     public static void main(String[] args) {
         ArrayList<BodyMassIndex> bmiData = new ArrayList<BodyMassIndex>();
 
@@ -21,7 +22,17 @@ public class App {
         displayBmiStatistics(bmiData);
     }
 
-    
+
+     */
+
+    public static void main(String[] args) {
+
+        double x = getPositiveDouble();
+
+        System.out.println(x);
+
+    }
+
 
     private static boolean moreInput() {
 
@@ -45,6 +56,24 @@ public class App {
                 return moreInput();
 
         }
+
+    }
+
+    private static double getPositiveDouble() {
+
+        double posDouble;
+
+        posDouble = input.nextDouble();
+        input.nextLine();
+
+        if(posDouble < 0) {
+
+            System.out.println("ERROR: Cannot be negative");
+            return getPositiveDouble();
+
+        }
+
+        return posDouble;
 
     }
 
