@@ -27,9 +27,8 @@ public class App {
 
     public static void main(String[] args) {
 
-        double x = getPositiveDouble();
-
-        System.out.println(x);
+        double height = getUserHeight();
+        System.out.println(height);
 
     }
 
@@ -68,12 +67,24 @@ public class App {
 
         if(posDouble < 0) {
 
-            System.out.println("ERROR: Cannot be negative");
+            System.out.print("ERROR: Cannot be negative...try again: ");
             return getPositiveDouble();
 
         }
 
         return posDouble;
+
+    }
+
+    private static double getUserHeight() {
+
+        double height;
+
+        System.out.print("Enter user's height [inches]: ");
+        height = getPositiveDouble();
+
+        return height;
+
 
     }
 
