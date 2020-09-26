@@ -28,8 +28,11 @@ public class App {
     public static void main(String[] args) {
 
         double height = getUserHeight();
-        System.out.println(height);
+        double weight = getUserWeight();
 
+        System.out.println(height);
+        System.out.println(weight);
+        
     }
 
 
@@ -86,6 +89,17 @@ public class App {
 
         return height;
 
+
+    }
+
+    private static double getUserWeight() {
+
+        double weight;
+
+        System.out.print("Enter user's weight [lbs]: ");
+        weight = getPositiveDouble("Enter user's weight [lbs]: ");
+
+        return weight;
 
     }
 
