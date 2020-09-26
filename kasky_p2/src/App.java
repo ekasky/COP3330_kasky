@@ -4,7 +4,7 @@ public class App {
 
     private static final Scanner input = new Scanner(System.in);
 
-    /*
+
     public static void main(String[] args) {
         ArrayList<BodyMassIndex> bmiData = new ArrayList<BodyMassIndex>();
 
@@ -21,14 +21,7 @@ public class App {
         displayBmiStatistics(bmiData);
     }
 
-     */
-
-    public static void main(String[] args) {
-
-        boolean tf = moreInput();
-        System.out.println(tf);
-
-    }
+    
 
     private static boolean moreInput() {
 
