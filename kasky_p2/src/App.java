@@ -32,7 +32,7 @@ public class App {
 
         System.out.println(height);
         System.out.println(weight);
-        
+
     }
 
 
