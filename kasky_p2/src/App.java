@@ -34,6 +34,7 @@ public class App {
         System.out.println(height);
         System.out.println(weight);
         System.out.println(bmi.calcBMI());
+        System.out.println(bmi.category());
 
     }
 
