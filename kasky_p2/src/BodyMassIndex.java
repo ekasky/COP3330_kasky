@@ -9,6 +9,8 @@ public class BodyMassIndex {
 
         this.weight = weight;
         this.height = height;
+        calcBMI();
+        category();
 
     }
 
@@ -59,5 +61,6 @@ public class BodyMassIndex {
 
 
     }
+
 
 }

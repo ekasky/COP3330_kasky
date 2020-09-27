@@ -1,4 +1,6 @@
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class App {
 
@@ -22,7 +24,7 @@ public class App {
         displayBmiStatistics(bmiData);
     }
 
-    
+
 
     private static boolean moreInput() {
 
@@ -88,6 +90,31 @@ public class App {
         weight = getPositiveDouble("Enter user's weight [lbs]: ");
 
         return weight;
+
+    }
+
+    private static void displayBmiInfo(BodyMassIndex bmi) {
+
+        System.out.println("BMI: " + bmi.calcBMI());
+        System.out.println("Category :" + bmi.category());
+
+    }
+
+    private static void displayBmiStatistics(ArrayList<BodyMassIndex> bmiData) {
+
+        Iterator itr = bmiData.iterator();
+        double bmiAvg = 0;
+
+        while(itr.hasNext()) {
+
+            BodyMassIndex temp = (BodyMassIndex)itr.next();
+            bmiAvg += temp.calcBMI();
+
+        }
+
+        bmiAvg = bmiAvg / bmiData.size();
+
+        System.out.println("Average BMI of data: " + bmiAvg);
 
     }
 
