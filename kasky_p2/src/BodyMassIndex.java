@@ -11,4 +11,16 @@ public class BodyMassIndex {
 
     }
 
+    public double calcBMI() {
+
+        double BMI;
+
+        BMI = (703 * this.weight) / Math.pow(this.height, 2);
+
+        this.bmi = BMI;
+
+        return BMI;
+
+    }
+
 }

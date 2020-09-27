@@ -29,9 +29,11 @@ public class App {
 
         double height = getUserHeight();
         double weight = getUserWeight();
+        BodyMassIndex bmi = new BodyMassIndex(height, weight);
 
         System.out.println(height);
         System.out.println(weight);
+        System.out.println(bmi.calcBMI());
 
     }
 
