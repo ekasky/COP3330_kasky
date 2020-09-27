@@ -5,7 +5,7 @@ public class App {
     private static final Scanner input = new Scanner(System.in);
 
 
-    /*
+
     public static void main(String[] args) {
         ArrayList<BodyMassIndex> bmiData = new ArrayList<BodyMassIndex>();
 
@@ -22,22 +22,7 @@ public class App {
         displayBmiStatistics(bmiData);
     }
 
-
-     */
-
-    public static void main(String[] args) {
-
-        double height = getUserHeight();
-        double weight = getUserWeight();
-        BodyMassIndex bmi = new BodyMassIndex(height, weight);
-
-        System.out.println(height);
-        System.out.println(weight);
-        System.out.println(bmi.calcBMI());
-        System.out.println(bmi.category());
-
-    }
-
+    
 
     private static boolean moreInput() {
 
