@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 public class BodyMassIndex {
 
     private double weight;
@@ -19,9 +22,18 @@ public class BodyMassIndex {
         double BMI;
 
         BMI = (703 * this.weight) / Math.pow(this.height, 2);
+        BMI = roundNumberOneDecimal(BMI);
         this.bmi = BMI;
 
         return BMI;
+
+    }
+
+    private static double roundNumberOneDecimal(double num) {
+
+        double rounded = Math.round(num * 10.0) / 10.0;
+        return rounded;
+
 
     }
 
