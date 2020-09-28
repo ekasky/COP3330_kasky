@@ -21,80 +21,70 @@ class BodyMassIndexTest {
     @Test
     void getBmi() {
 
-        double expectedBmi = 21.6;
-        assertEquals(expectedBmi, normalWeight.getBmi());
+        assertEquals(21.6, normalWeight.getBmi());
 
     }
 
     @Test
     void getCat() {
 
-        String expectedCat = "Normal Weight";
-        assertEquals(expectedCat, normalWeight.getCat());
+        assertEquals("Normal Weight", normalWeight.getCat());
 
     }
 
     @Test
     void calcBmiUnderWeight() {
 
-        double expectedBmi = 17.3;
-        assertEquals(expectedBmi, underWeight.getBmi());
+        assertEquals(17.3, underWeight.getBmi());
 
     }
 
     @Test
     void categoryUnderWeight() {
 
-        String expectedCat = "Under Weight";
-        assertEquals(expectedCat, underWeight.getCat());
+        assertEquals("Under Weight", underWeight.getCat());
 
     }
 
     @Test
     void calcBmiNormalWeight() {
 
-        double expectedBmi = 21.6;
-        assertEquals(expectedBmi, normalWeight.getBmi());
+        assertEquals(21.6, normalWeight.getBmi());
 
     }
 
     @Test
     void categoryNormalWeight() {
 
-        String expectedCat = "Normal Weight";
-        assertEquals(expectedCat, normalWeight.getCat());
+        assertEquals("Normal Weight", normalWeight.getCat());
 
     }
 
     @Test
     void calcBmiOverWeight() {
 
-        double expectedBmi = 28.0;
-        assertEquals(expectedBmi, overWeight.getBmi());
+        assertEquals(28.0, overWeight.getBmi());
 
     }
 
     @Test
     void categoryOverWeight() {
 
-        String expectedCat = "Over Weight";
-        assertEquals(expectedCat, overWeight.getCat());
+        assertEquals("Over Weight", overWeight.getCat());
 
     }
 
     @Test
     void calcBmiObese() {
 
-        double expectedBmi = 48.4;
-        assertEquals(expectedBmi, obese.getBmi());
+        assertEquals(48.4, obese.getBmi());
 
     }
 
     @Test
     void categoryObese() {
 
-        String expectedCat = "Obese";
-        assertEquals(expectedCat, obese.getCat());
+        assertEquals("Obese", obese.getCat());
 
     }
 
