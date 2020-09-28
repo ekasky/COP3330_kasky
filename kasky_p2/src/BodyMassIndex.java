@@ -1,78 +1,52 @@
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-
 public class BodyMassIndex {
 
-    private double weight;
     private double height;
+    private double weight;
     private double bmi;
     private String cat;
 
     public BodyMassIndex(double height, double weight) {
 
-        this.weight = weight;
-        this.height = height;
-        calcBMI();
-        category();
+            this.height = height;
+            this.weight = weight;
+            calcBmi();
+            category();
 
     }
 
-    public double calcBMI() {
+    public double getBmi() {
+        return bmi;
+    }
 
-        double BMI;
+    public String getCat() {
+        return cat;
+    }
 
-        BMI = (703 * this.weight) / Math.pow(this.height, 2);
-        BMI = roundNumberOneDecimal(BMI);
-        this.bmi = BMI;
+    public void calcBmi() {
 
-        return BMI;
+        bmi = (703 * weight) / Math.pow(height, 2);
+        bmi = App.roundDoubleODP(bmi);
 
     }
 
-    private static double roundNumberOneDecimal(double num) {
+    public void category() {
 
-        double rounded = Math.round(num * 10.0) / 10.0;
-        return rounded;
-
-
-    }
-
-    public String category() {
-
-        if(this.bmi < 18.5) {
-
-            this.cat = "Under Weight";
-            return "Under Weight";
-
+        if(bmi < 18.5) {
+            cat = "Under Weight";
         }
-        else if(this.bmi >= 18.5 && this.bmi <= 24.9) {
-
-            this.cat = "Normal Weight";
-            return "Normal Weight";
-
+        else if( bmi >= 18.5 && bmi <= 24.9 ) {
+            cat = "Normal Weight";
         }
-        else if(this.bmi >= 25 && this.bmi <= 29.9) {
-
-            this.cat = "Over Weight";
-            return "Over Weight";
-
+        else if(bmi >= 25 && bmi <= 29.9) {
+            cat = "Over Weight";
         }
-        else if(this.bmi >= 30) {
-
-            this.cat = "Obesity";
-            return "Obesity";
-
+        else if(bmi >= 30) {
+            cat = "Obese";
         }
         else {
-
-            this.cat = "ERROR";
-            return "ERROR";
-
+            cat = "ERROR";
         }
 
-
-
     }
-
 
 }

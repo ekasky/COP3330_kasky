@@ -1,12 +1,10 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class App {
 
     private static final Scanner input = new Scanner(System.in);
-
-
 
     public static void main(String[] args) {
         ArrayList<BodyMassIndex> bmiData = new ArrayList<BodyMassIndex>();
@@ -24,18 +22,16 @@ public class App {
         displayBmiStatistics(bmiData);
     }
 
-
-
+    // Asks user if they have more data to enter
     private static boolean moreInput() {
 
-        char moreData;
+        char userInput;
 
-        System.out.println("Enter more data [Y or N]: ");
-        moreData = input.next().charAt(0);
+        System.out.print("Do you have more data Y or N: ");
+        userInput = input.next().charAt(0);
+        userInput = Character.toUpperCase(userInput);
 
-        moreData = Character.toUpperCase(moreData);
-
-        switch (moreData) {
+        switch (userInput) {
 
             case 'Y':
                 return true;
@@ -44,61 +40,62 @@ public class App {
                 return false;
 
             default:
-                System.out.println("Please enter either Y or N");
+                System.out.println("ERROR: Invalid input -  Y or N");
                 return moreInput();
 
         }
 
     }
 
+    //Gets a positive double from user
     private static double getPositiveDouble(String message) {
 
         double posDouble;
-
+        System.out.print(message);
         posDouble = input.nextDouble();
-        input.nextLine();
 
         if(posDouble < 0) {
-
             System.out.println("ERROR: Cannot be negative");
-            System.out.print(message);
             return getPositiveDouble(message);
-
         }
 
         return posDouble;
 
     }
 
+    // Gets Height from user
     private static double getUserHeight() {
 
-        double height;
-
-        System.out.print("Enter user's height [inches]: ");
-        height = getPositiveDouble("Enter user's height [inches]: ");
-
+        double height = getPositiveDouble("Enter Height in inches: ");
         return height;
-
 
     }
 
+    // Gets Weight from user
     private static double getUserWeight() {
 
-        double weight;
-
-        System.out.print("Enter user's weight [lbs]: ");
-        weight = getPositiveDouble("Enter user's weight [lbs]: ");
-
+        double weight = getPositiveDouble("Enter Weight in pounds: ");
         return weight;
 
     }
 
-    private static void displayBmiInfo(BodyMassIndex bmi) {
+    //Rounds a double to one decimal place
+    public static double roundDoubleODP(double number) {
 
-        System.out.println("BMI: " + bmi.calcBMI());
-        System.out.println("Category :" + bmi.category());
+        double rounded = Math.round(number * 10.0) / 10.0;
+        return rounded;
 
     }
+
+    //Prints last entered BMI and category
+    private static void displayBmiInfo(BodyMassIndex bmi) {
+
+        System.out.println("BMI: " + bmi.getBmi());
+        System.out.println("Category: " + bmi.getCat());
+
+    }
+
+    //Prints average BMI from data entered
 
     private static void displayBmiStatistics(ArrayList<BodyMassIndex> bmiData) {
 
@@ -108,14 +105,17 @@ public class App {
         while(itr.hasNext()) {
 
             BodyMassIndex temp = (BodyMassIndex)itr.next();
-            bmiAvg += temp.calcBMI();
+            bmiAvg += temp.getBmi();
 
         }
 
         bmiAvg = bmiAvg / bmiData.size();
+        bmiAvg = roundDoubleODP(bmiAvg);
 
-        System.out.println("Average BMI of data: " + bmiAvg);
+        System.out.println("Average BMI: " + bmiAvg);
+
 
     }
+
 
 }
