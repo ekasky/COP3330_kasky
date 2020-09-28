@@ -66,24 +66,21 @@ public class App {
     // Gets Height from user
     private static double getUserHeight() {
 
-        double height = getPositiveDouble("Enter Height in inches: ");
-        return height;
+        return getPositiveDouble("Enter Height in inches: ");
 
     }
 
     // Gets Weight from user
     private static double getUserWeight() {
 
-        double weight = getPositiveDouble("Enter Weight in pounds: ");
-        return weight;
+        return getPositiveDouble("Enter Weight in pounds: ");
 
     }
 
     //Rounds a double to one decimal place
     public static double roundDoubleODP(double number) {
 
-        double rounded = Math.round(number * 10.0) / 10.0;
-        return rounded;
+        return Math.round(number * 10.0) / 10.0;
 
     }
 

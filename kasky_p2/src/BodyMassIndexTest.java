@@ -8,11 +8,18 @@ class BodyMassIndexTest {
 
 
     @Test
-    public void testCalcBmiUnderWeight() {
-
-
-
+    void getBmi() {
     }
 
+    @Test
+    void getCat() {
+    }
 
+    @Test
+    void calcBmi() {
+    }
+
+    @Test
+    void category() {
+    }
 }
