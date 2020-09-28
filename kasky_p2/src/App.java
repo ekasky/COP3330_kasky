@@ -111,7 +111,7 @@ public class App {
             bmiAvg += temp.calcBMI();
 
         }
-        
+
         bmiAvg = bmiAvg / bmiData.size();
 
         System.out.println("Average BMI of data: " + bmiAvg);
