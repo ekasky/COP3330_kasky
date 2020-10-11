@@ -13,6 +13,13 @@ public class Square extends Shape2D {
 
     @Override
     public double getArea() {
-        return (Math.pow(length, 2));
+        return calcArea2D();
+    }
+
+    @Override
+    public double calcArea2D() {
+        double area;
+        area = Math.pow(length, 2);
+        return area;
     }
 }
