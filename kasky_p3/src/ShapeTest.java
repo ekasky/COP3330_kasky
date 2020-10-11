@@ -42,7 +42,7 @@ class ShapeTest {
     }
 
 
-/*
+
     @Test
     public void testCircleName() {
         Shape shape = new Circle(10);
@@ -62,7 +62,7 @@ class ShapeTest {
     }
 
 
-
+/*
     @Test
     public void testCubeName() {
         Shape shape = new Cube(100);
