@@ -126,7 +126,7 @@ class ShapeTest {
     }
 
 
-/*
+
     @Test
     public void testSphereName() {
         Shape shape = new Sphere(10);
@@ -156,6 +156,4 @@ class ShapeTest {
         Shape3D shape = new Sphere(0.6);
         assertEquals(0.9, shape.getVolume(), 0.1);
     }
-
- */
 }
