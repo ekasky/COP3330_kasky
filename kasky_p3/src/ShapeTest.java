@@ -94,7 +94,7 @@ class ShapeTest {
     }
 
 
-/*
+
     @Test
     public void testPyramidName() {
         Shape3D shape = new Pyramid(10, 10, 10);
@@ -126,7 +126,7 @@ class ShapeTest {
     }
 
 
-
+/*
     @Test
     public void testSphereName() {
         Shape shape = new Sphere(10);
