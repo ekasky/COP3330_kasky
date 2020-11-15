@@ -3,12 +3,14 @@ public class TaskItem {
     private String title;
     private String description;
     private DueDate date;
+    private boolean complete;
 
     TaskItem(String title, String description) {
 
         this.title = title;
         this.description = description;
-        date = new DueDate();
+        this.date = new DueDate();
+        this.complete = false;
     }
 
     public String getTitle() {
@@ -36,6 +38,23 @@ public class TaskItem {
     public void setDueDate() {
 
         date = new DueDate();
+
+    }
+
+    public boolean getComplete() {
+        return this.complete;
+    }
+
+    public void setComplete(boolean complete) {
+
+        this.complete = complete;
+
+    }
+
+    @Override
+    public String toString() {
+
+        return date + " " + title + ": " + description;
 
     }
 }
