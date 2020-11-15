@@ -12,7 +12,9 @@ public class TaskList {
 
         item.setTitle(getTitle());
         item.setDescription(getDescription());
-        
+
+        list.add(item);
+
 
      }
 
@@ -39,6 +41,18 @@ public class TaskList {
          description = input.nextLine();
 
          return description;
+
+     }
+
+    public void displayList() {
+
+         System.out.println();
+         System.out.println("Current List");
+         System.out.println("------------");
+
+         for(int i = 0; i < list.size(); i++) {
+             System.out.println(i + ") " + list.get(i).toString());
+         }
 
      }
 
