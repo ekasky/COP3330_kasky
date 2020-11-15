@@ -13,12 +13,94 @@ public class App {
         String[] newListOptions = {"View the list", "Add an item", "Edit an item",
                 "Remove an item", "Mark an item as completed", "Unmark an item as completed",
                 "Save the current list", "Quit to the main menu"};
+        int choice = 0;
 
-        mainMenu.menuHeader("Main Menu");
-        mainMenu.menuOptions(mainMenuOptions);
-        int choice = mainMenu.getInteger();
-        System.out.println(choice);
 
+        // Main Menu
+        do {
+
+            mainMenu.menuHeader("Main Menu");
+            mainMenu.menuOptions(mainMenuOptions);
+            choice = getInteger();
+
+            switch (choice) {
+
+                case 1:
+
+                    do {
+
+                        newListMenu.menuHeader("List Operation Menu");
+                        newListMenu.menuOptions(newListOptions);
+                        choice = getInteger();
+
+                        switch (choice) {
+
+                            case 1:
+                                System.out.println("Placeholder 1");
+                                break;
+
+                            case 2:
+                                System.out.println("Placeholder 2");
+                                break;
+
+                            case 3:
+                                System.out.println("Placeholder 3");
+                                break;
+
+                            case 4:
+                                System.out.println("Placeholder 4");
+                                break;
+
+                            case 5:
+                                System.out.println("Placeholder 5");
+                                break;
+
+                            case 6:
+                                System.out.println("Placeholder 6");
+                                break;
+
+                            case 7:
+                                System.out.println("Placeholder 7");
+                                break;
+
+                            case 8:
+                                System.out.println("Placeholder 8");
+                                break;
+
+                            case 0:
+                                //Do nothing
+                                break;
+
+                            default:
+                                System.out.println("Invalid Input");
+                                break;
+
+                        }
+
+
+                    } while(choice != 8);
+
+                    break;
+
+                case 2:
+                    System.out.println("Choice 2");
+                    break;
+
+                case 3:
+                    System.out.println("Good Bye!");
+                    break;
+
+                case 0:
+                    //Do nothing
+                    break;
+
+                default:
+                    System.out.println("Invalid Input");
+                    break;
+
+            }
+
+        } while(choice != 3);
 
     }
 
@@ -45,7 +127,7 @@ public class App {
     }
 
     // Get a integer
-    private int getInteger() {
+    private static int getInteger() {
 
         int result = 0;
 
