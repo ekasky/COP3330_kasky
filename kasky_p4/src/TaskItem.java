@@ -2,12 +2,13 @@ public class TaskItem {
 
     private String title;
     private String description;
-    private String dueDate;
+    private DueDate date = new DueDate();
 
-    TaskItem(String title, String description, String dueDate) {
+    TaskItem(String title, String description) {
+
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
+
     }
 
     public String getTitle() {
@@ -27,11 +28,14 @@ public class TaskItem {
     }
 
     public String getDueDate() {
-        return this.dueDate;
+
+        return date.toString();
+
     }
 
-    public void setDueDate(String dueDate){
-        this.dueDate = dueDate;
-    }
+    public void setDueDate() {
 
+        date = new DueDate();
+
+    }
 }
