@@ -7,128 +7,40 @@ public class App {
 
     public static void main(String[] args) {
 
-        int choice = 0;
-        int newMenuChoice = 0;
+        App mainMenu = new App();
+        App newListMenu = new App();
+        String[] mainMenuOptions = {"Create a new list", "Load an existing list", "Quit"};
+        String[] newListOptions = {"View the list", "Add an item", "Edit an item",
+                "Remove an item", "Mark an item as completed", "Unmark an item as completed",
+                "Save the current list", "Quit to the main menu"};
 
-        do {
+        mainMenu.menuHeader("Main Menu");
+        mainMenu.menuOptions(mainMenuOptions);
 
-            //Print Main Menu
-            System.out.println("Main Menu");
-            System.out.println("---------");
-            mainOptions();
-
-            //Get User Input
-            try {
-                choice = input.nextInt();
-            }
-            catch (InputMismatchException e){
-                System.out.println("Invalid Input");
-                input.nextLine();
-            }
-
-            // Run choice user inputted
-            switch (choice) {
-
-                case 1:
-
-                    //Print new list menu
-                    System.out.println("List Operation Menu");
-                    System.out.println("---------");
-                    newListOptions();
-
-                    //Get User Input
-                    try {
-                        newMenuChoice = input.nextInt();
-                    }
-                    catch (InputMismatchException e) {
-                        System.out.println("Invalid Input");
-                        input.nextLine();
-                    }
-
-                    newListSwitch(newMenuChoice);
-
-                    break;
-
-                case 2:
-                    System.out.println("Placeholder 2");
-                    break;
-
-                case 3:
-                    System.out.println("Good Bye!");
-                    break;
-
-                default:
-                    if(choice != 0)
-                        System.out.println("Invalid Input");
-                    break;
-
-            }
-
-
-        } while(choice != 3);
+        newListMenu.menuHeader("List Operation Menu");
+        newListMenu.menuOptions(newListOptions);
 
     }
 
-    private static void mainOptions() {
+    //Menu Functions
+    private void menuHeader(String title) {
 
-        System.out.println("1) Create a new list");
-        System.out.println("2) Load a existing list");
-        System.out.println("3) Quit");
-        System.out.print("> ");
-
-    }
-
-    private static void newListOptions() {
-
-        System.out.println("1) View the list");
-        System.out.println("2) Add an item");
-        System.out.println("3) Edit an item");
-        System.out.println("4) Remove an item");
-        System.out.println("5) Mark an item as completed");
-        System.out.println("6) Un-Mark an item as completed");
-        System.out.println("7) Save the current list");
-        System.out.println("8) Quit to main menu");
-        System.out.print("> ");
+        System.out.println(title);
+        for(int i = 0; i < title.length(); i++)
+            System.out.print("-");
+        System.out.println();
 
     }
 
-    private static void newListSwitch(int choice) {
+    private void menuOptions(String[] options) {
 
-        switch (choice) {
+        for(int i = 0 ; i < options.length; i++) {
 
-            case 1:
-                System.out.println("Placeholder 1");
-                break;
-
-            case 2:
-                System.out.println("Placeholder 2");
-                break;
-
-            case 3:
-                System.out.println("Placeholder 3");
-                break;
-
-            case 4:
-                System.out.println("Placeholder 4");
-                break;
-
-            case 5:
-                System.out.println("Placeholder 5");
-                break;
-
-            case 6:
-                System.out.println("Placeholder 6");
-                break;
-
-            case 7:
-                System.out.println("Placeholder 7");
-                break;
-
-            case 8:
-
-                break;
+            System.out.println(i+1 + ") " + options[i]);
 
         }
+
+        System.out.print("> ");
 
     }
 
