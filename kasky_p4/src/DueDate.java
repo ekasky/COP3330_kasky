@@ -72,4 +72,37 @@ public class DueDate {
 
     }
 
+    public static int getDay(int year, int month) {
+
+        boolean leap = leapYear(year);
+        Scanner input = new Scanner(System.in);
+        int[] numberOfDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int day = 0;
+
+        if(leap) {
+            numberOfDays[1] = 29;
+        }
+
+        do {
+
+            System.out.print("Enter a day with format [dd]: ");
+
+            while(!input.hasNextInt()) {
+
+                System.out.print("Error...Not a valid day...Try again: ");
+                input.next();
+            }
+
+            day = input.nextInt();
+
+            if(day < numberOfDays[month-1] || day > numberOfDays[month-1]) {
+                System.out.println("Error...Not a valid day...Try again");
+            }
+
+        } while(day < 1 || day > numberOfDays[month-1]);
+
+        return day;
+
+    }
+
 }
