@@ -93,4 +93,21 @@ public class TaskList {
 
     }
 
+    public void printUncompleted() {
+
+        System.out.println("   Uncompleted Tasks   ");
+        System.out.println("-----------------------");
+
+        for(int i = 0; i < list.size(); i++) {
+
+            if(list.get(i).getComplete() == false) {
+                System.out.println(i + ") " + list.get(i));
+            }
+
+        }
+
+        System.out.println();
+
+    }
+
 }
