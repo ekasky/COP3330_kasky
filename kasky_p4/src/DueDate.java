@@ -106,7 +106,7 @@ public class DueDate {
 
             day = input.nextInt();
 
-            if(day < numberOfDays[month-1] || day > numberOfDays[month-1]) {
+            if(day < 0 || day > numberOfDays[month-1]) {
                 System.out.println("Error...Not a valid day...Try again");
             }
 
