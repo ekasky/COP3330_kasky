@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,15 +12,20 @@ public class TaskList {
         TaskItem item = new TaskItem();
         String title = getTitle();
         String description = getDescription();
-
+        String date = getDate();
 
         if(title == null) {
             System.out.println("WARNING: title must be at least one character long. Task not created");
             return;
         }
 
+        if(!isDateValid(date)) {
+            return;
+        }
+
         item.setTitle(title);
         item.setDescription(description);
+        item.setDate(date);
 
         list.add(item);
 
@@ -56,16 +62,33 @@ public class TaskList {
 
      }
 
-     /*
      private String getDate() {
 
          String date = null;
 
-         System.out.println();
+         System.out.print("Task due date (YYYY-MM-DD): ");
+
+         date = input.nextLine();
+
+         return date;
 
      }
 
-      */
+     private boolean isDateValid(String date) {
+
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+
+         try {
+             formatter.parse(date);
+         }
+         catch (Exception e) {
+             System.out.println("WARNING: invalid due date; task not created");
+             return false;
+         }
+
+         return true;
+
+     }
 
     public void displayList() {
 
