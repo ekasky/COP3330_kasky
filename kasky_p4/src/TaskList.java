@@ -41,8 +41,6 @@ public class TaskList {
 
         int size = list.size();
 
-        System.out.println(size);
-
         if(index < 0 || index >= size) {
             System.out.println("Error...Invalid Item");
         }
@@ -59,6 +57,8 @@ public class TaskList {
 
         }
 
+        System.out.println();
+
     }
 
     public void printList() {
@@ -69,6 +69,23 @@ public class TaskList {
         for(int i = 0; i < list.size(); i++) {
 
             System.out.println(i + ") " + list.get(i));
+
+        }
+
+        System.out.println();
+
+    }
+
+    public void printComplete() {
+
+        System.out.println("   Complete Tasks   ");
+        System.out.println("--------------------");
+
+        for(int i = 0; i < list.size(); i++) {
+
+            if(list.get(i).getComplete() == true) {
+                System.out.println(i + ") " + list.get(i));
+            }
 
         }
 
