@@ -37,6 +37,30 @@ public class TaskList {
 
     }
 
+    public void changeCompletion(int index) {
+
+        int size = list.size();
+
+        System.out.println(size);
+
+        if(index < 0 || index >= size) {
+            System.out.println("Error...Invalid Item");
+        }
+        else {
+
+            if(list.get(index).getComplete() == true) {
+                System.out.println(list.get(index).getTitle() + " unmarked");
+                list.get(index).setComplete(false);
+            }
+            else {
+                System.out.println(list.get(index).getTitle() + " marked as complete");
+                list.get(index).setComplete(true);
+            }
+
+        }
+
+    }
+
     public void printList() {
 
         System.out.println("   Task List   ");
@@ -47,6 +71,8 @@ public class TaskList {
             System.out.println(i + ") " + list.get(i));
 
         }
+
+        System.out.println();
 
     }
 
