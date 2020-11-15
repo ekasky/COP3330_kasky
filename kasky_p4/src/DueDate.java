@@ -6,7 +6,15 @@ public class DueDate {
     private int month;
     private int day;
     Scanner input = new Scanner(System.in);
-    
+
+    DueDate() {
+
+        setYear();
+        setMonth();
+        setDay(year, month);
+
+    }
+
     public void setYear() {
 
         int year;
