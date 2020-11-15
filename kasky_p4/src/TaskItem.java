@@ -28,5 +28,8 @@ public class TaskItem {
         this.date = date;
     }
 
-
+    @Override
+    public String toString() {
+        return "[yyyy-mm-dd] " + this.title + ": " + this.description;
+    }
 }
