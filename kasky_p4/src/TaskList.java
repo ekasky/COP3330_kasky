@@ -1,9 +1,25 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class TaskList {
 
-    private int numberOfTasks;
+    Scanner input = new Scanner(System.in);
+    ArrayList <TaskItem> list = new ArrayList<>();
 
-    TaskList() {
-        this.numberOfTasks = 0;
+    public void addTask() {
+
+        String title;
+        String description;
+
+        System.out.print("Task Title: ");
+        title = input.nextLine();
+
+        System.out.print("Task Description: ");
+        description = input.nextLine();
+
+        TaskItem newItem = new TaskItem(title, description);
+        list.add(newItem);
+
     }
 
     
