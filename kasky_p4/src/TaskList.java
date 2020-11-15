@@ -9,9 +9,17 @@ public class TaskList {
      public void addTask() {
 
         TaskItem item = new TaskItem();
+        String title = getTitle();
+        String description = getDescription();
 
-        item.setTitle(getTitle());
-        item.setDescription(getDescription());
+
+        if(title == null) {
+            System.out.println("WARNING: title must be at least one character long. Task not created");
+            return;
+        }
+
+        item.setTitle(title);
+        item.setDescription(description);
 
         list.add(item);
 
@@ -25,6 +33,10 @@ public class TaskList {
          System.out.print("Task Title: ");
 
          title = input.nextLine();
+
+         if(title.length() < 1) {
+             return null;
+         }
 
          return title;
 
@@ -43,6 +55,17 @@ public class TaskList {
          return description;
 
      }
+
+     /*
+     private String getDate() {
+
+         String date = null;
+
+         System.out.println();
+
+     }
+
+      */
 
     public void displayList() {
 
