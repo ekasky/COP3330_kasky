@@ -22,7 +22,25 @@ public class TaskList {
 
     }
 
+    public void removeItem(int index) {
+
+        int size = list.size();
+
+        if(index < 0 || index > size) {
+            System.out.println("Error...Index not valid");
+        }
+        else {
+
+            list.remove(index);
+
+        }
+
+    }
+
     public void printList() {
+
+        System.out.println("   Task List   ");
+        System.out.println("---------------");
 
         for(int i = 0; i < list.size(); i++) {
 
