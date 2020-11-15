@@ -2,9 +2,12 @@ import java.util.Scanner;
 
 public class DueDate {
 
+    private int year;
+    private int month;
+    private int day;
     Scanner input = new Scanner(System.in);
-
-    public int getYear() {
+    
+    public void setYear() {
 
         int year;
 
@@ -25,11 +28,11 @@ public class DueDate {
 
         } while(year < 0);
 
-        return year;
+        this.year = year;
 
     }
 
-    public int getMonth() {
+    public void setMonth() {
 
         int month;
 
@@ -50,11 +53,11 @@ public class DueDate {
 
         } while(month < 1 || month > 12);
 
-        return month;
+        this.month = month;
 
     }
 
-    public static boolean leapYear(int year) {
+    public boolean leapYear(int year) {
 
         boolean leap = false;
 
@@ -72,7 +75,7 @@ public class DueDate {
 
     }
 
-    public static int getDay(int year, int month) {
+    public void setDay(int year, int month) {
 
         boolean leap = leapYear(year);
         Scanner input = new Scanner(System.in);
@@ -101,8 +104,14 @@ public class DueDate {
 
         } while(day < 1 || day > numberOfDays[month-1]);
 
-        return day;
+        this.day = day;
 
     }
 
+    @Override
+    public String toString() {
+
+        return "[" + year + "-" + month + "-" + day + "]";
+
+    }
 }
