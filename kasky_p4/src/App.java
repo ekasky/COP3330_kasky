@@ -16,9 +16,9 @@ public class App {
 
         mainMenu.menuHeader("Main Menu");
         mainMenu.menuOptions(mainMenuOptions);
+        int choice = mainMenu.getInteger();
+        System.out.println(choice);
 
-        newListMenu.menuHeader("List Operation Menu");
-        newListMenu.menuOptions(newListOptions);
 
     }
 
@@ -41,6 +41,23 @@ public class App {
         }
 
         System.out.print("> ");
+
+    }
+
+    // Get a integer
+    private int getInteger() {
+
+        int result = 0;
+
+        try {
+            result = input.nextInt();
+        }
+        catch (InputMismatchException e) {
+            System.out.println("Invalid Input");
+            input.nextLine();
+        }
+
+        return result;
 
     }
 
