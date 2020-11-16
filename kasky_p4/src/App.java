@@ -58,7 +58,7 @@ public class App {
                                 break;
 
                             case 5:
-                                System.out.println("Placeholder 5");
+                                list.markAsComplete();
                                 break;
 
                             case 6:
