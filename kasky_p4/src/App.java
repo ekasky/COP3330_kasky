@@ -62,7 +62,7 @@ public class App {
                                 break;
 
                             case 6:
-                                System.out.println("Placeholder 6");
+                                list.unMarkComplete();
                                 break;
 
                             case 7:

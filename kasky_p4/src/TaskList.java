@@ -222,6 +222,40 @@ public class TaskList {
 
      }
 
+     public void unMarkComplete() {
+
+         int index;
+
+         System.out.println("Completed Tasks");
+         System.out.println("---------------");
+         for(int i = 0; i < list.size(); i++) {
+
+             if(list.get(i).getComplete()) {
+
+                 System.out.println(i + ") " + list.get(i).toString());
+
+             }
+
+         }
+         System.out.println();
+
+         System.out.print("Which task will you un-mark as completed: ");
+         index = App.getInteger();
+
+         try {
+
+             list.get(index).setComplete(false);
+
+         }
+         catch (IndexOutOfBoundsException e) {
+             System.out.println();
+             System.out.println("Warning: Index does not exist. Cannot remove task");
+             System.out.println();
+             return;
+         }
+
+     }
+
      public void clearList() {
          list.clear();
      }
