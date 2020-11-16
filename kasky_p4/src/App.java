@@ -14,6 +14,7 @@ public class App {
                 "Remove an item", "Mark an item as completed", "Unmark an item as completed",
                 "Save the current list", "Quit to the main menu"};
         int choice = 0;
+        TaskList list = new TaskList();
 
 
         // Main Menu
@@ -36,11 +37,11 @@ public class App {
                         switch (choice) {
 
                             case 1:
-                                System.out.println("Placeholder 1");
+                                list.displayList();
                                 break;
 
                             case 2:
-                                System.out.println("Placeholder 2");
+                                list.addTask();
                                 break;
 
                             case 3:
@@ -64,7 +65,7 @@ public class App {
                                 break;
 
                             case 8:
-                                System.out.println("Placeholder 8");
+                                list.clearList();
                                 break;
 
                             case 0:
@@ -127,7 +128,7 @@ public class App {
     }
 
     // Get a integer
-    private static int getInteger() {
+    public static int getInteger() {
 
         int result = 0;
 

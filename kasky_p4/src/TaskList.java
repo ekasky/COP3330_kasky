@@ -15,7 +15,9 @@ public class TaskList {
         String date = getDate();
 
         if(title == null) {
+            System.out.println();
             System.out.println("WARNING: title must be at least one character long. Task not created");
+            System.out.println();
             return;
         }
 
@@ -82,7 +84,9 @@ public class TaskList {
              formatter.parse(date);
          }
          catch (Exception e) {
+             System.out.println();
              System.out.println("WARNING: invalid due date; task not created");
+             System.out.println();
              return false;
          }
 
@@ -100,6 +104,12 @@ public class TaskList {
              System.out.println(i + ") " + list.get(i).toString());
          }
 
+         System.out.println();
+
+     }
+
+     public void clearList() {
+         list.clear();
      }
 
 }

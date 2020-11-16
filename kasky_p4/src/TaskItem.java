@@ -30,6 +30,6 @@ public class TaskItem {
 
     @Override
     public String toString() {
-        return "[yyyy-mm-dd] " + this.title + ": " + this.description;
+        return "[" + this.date + "] " + this.title + ": " + this.description;
     }
 }
