@@ -15,6 +15,7 @@ public class App {
                 "Save the current list", "Quit to the main menu"};
         int choice = 0;
         TaskList list = new TaskList();
+        int index = 0;
 
 
         // Main Menu
@@ -46,12 +47,14 @@ public class App {
 
                             case 3:
                                 System.out.print("Task Index: ");
-                                int index = getInteger();
+                                index = getInteger();
                                 list.editTask(index);
                                 break;
 
                             case 4:
-                                System.out.println("Placeholder 4");
+                               System.out.print("Task Index: ");
+                               index =  getInteger();
+                               list.removeItem(index);
                                 break;
 
                             case 5:

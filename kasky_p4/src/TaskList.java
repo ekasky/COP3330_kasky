@@ -170,6 +170,24 @@ public class TaskList {
 
      }
 
+     public void removeItem(int index) {
+
+         try {
+
+             list.remove(index);
+
+         }
+         catch (IndexOutOfBoundsException e) {
+
+             System.out.println();
+             System.out.println("Warning: Index does not exist. Cannot remove task");
+             System.out.println();
+             return;
+
+         }
+
+     }
+
      public void clearList() {
          list.clear();
      }
