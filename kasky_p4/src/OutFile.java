@@ -15,11 +15,11 @@ public class OutFile {
     public void getPath() {
 
         getFileName();
-        this.path = "/kasky_p4/Lists/" + fileName;
+        this.path = "/kasky_p4/Lists/" + fileName + ".txt";
 
     }
 
-    
+
 
 
 }

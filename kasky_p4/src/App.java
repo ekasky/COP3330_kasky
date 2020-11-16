@@ -66,7 +66,8 @@ public class App {
                                 break;
 
                             case 7:
-                                System.out.println("Placeholder 7");
+                                OutFile f = new OutFile();
+                                f.getPath();
                                 break;
 
                             case 8:
