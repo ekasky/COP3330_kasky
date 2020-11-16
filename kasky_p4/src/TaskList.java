@@ -1,4 +1,3 @@
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,295 +6,161 @@ public class TaskList {
     static Scanner input = new Scanner(System.in);
     private ArrayList<TaskItem> list = new ArrayList<>();
 
-     public void addTask() {
+    public ArrayList<TaskItem> getList() {
+        return list;
+    }
 
-        TaskItem item = new TaskItem();
-        String title = getTitle();
-        String description = getDescription();
-        String date = getDate();
-
-        if(!isTitleValid(title)) {
-            return;
-        }
-
-        if(!isDateValid(date)) {
-            return;
-        }
-
-         if(description == null) {
-             System.out.println();
-             System.out.println("WARNING:  :, ], ?  are invalid symbols. Task not created");
-             System.out.println();
-             return;
-         }
-
-        item.setTitle(title);
-        item.setDescription(description);
-        item.setDate(date);
-
-        list.add(item);
-
-
-     }
-
-     private String getTitle() {
-
-         String title;
-
-         System.out.print("Task Title: ");
-
-         title = input.nextLine();
-
-         if(title.length() < 1) {
-             return null;
-         }
-
-         return title;
-
-
-
-     }
-
-     private String getDescription() {
-
-         String description;
-
-         System.out.print("Task Description: ");
-
-         description = input.nextLine();
-
-         char[] arr = description.toCharArray();
-
-         for(int i = 0; i < arr.length; i++) {
-
-             if(arr[i] == ':' || arr[i] == ']' || arr[i] == '?') {
-                 return null;
-             }
-
-         }
-
-         return description;
-
-     }
-
-     private String getDate() {
-
-         String date;
-
-         System.out.print("Task due date (YYYY-MM-DD): ");
-
-         date = input.nextLine();
-
-         return date;
-
-     }
-
-     private boolean isTitleValid(String title) {
-
-         boolean valid = false;
-
-         try {
-             if(title.length() >= 1) {
-                 valid = true;
-             }
-
-             char[] arr = title.toCharArray();
-
-             for(int i = 0; i < arr.length; i++) {
-
-                 if(arr[i] == ':' || arr[i] == ']' || arr[i] == '?') {
-                     System.out.println();
-                     System.out.println("WARNING:  :, ], ?  are invalid symbols. Task not created");
-                     System.out.println();
-                     valid = false;
-
-                 }
-
-             }
-
-         }
-         catch (NullPointerException e) {
-             System.out.println();
-             System.out.println("WARNING: title must be at least one character long. Task not created");
-             System.out.println();
-             valid = false;
-         }
-
-         return valid;
-
-     }
-
-     private boolean isDateValid(String date) {
-
-         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-         try {
-             formatter.parse(date);
-         }
-         catch (Exception e) {
-             System.out.println();
-             System.out.println("WARNING: invalid due date; task not created");
-             System.out.println();
-             return false;
-         }
-
-         return true;
-
-     }
+    public void setList(ArrayList<TaskItem> list) {
+        this.list = list;
+    }
 
     public void displayList() {
 
-         System.out.println();
-         System.out.println("Current List");
-         System.out.println("------------");
+        System.out.println("Current Tasks");
+        System.out.println("-------------");
 
-         for(int i = 0; i < list.size(); i++) {
-             System.out.println(i + ") " + list.get(i).toString());
-         }
+        for(int i = 0; i < list.size(); i++) {
 
-         System.out.println();
+            System.out.println(i + ") " + list.get(i).toString());
 
-     }
+        }
+
+        System.out.println();
+
+    }
+
+    public void addItem() {
+
+        TaskItem item = new TaskItem();
+
+        if(!isTaskValid(item)) {
+            return;
+        }
+
+        list.add(item);
+
+    }
+
+    public static boolean isTaskValid(TaskItem item) {
+
+        if(!item.isTitleValid()) {
+            System.out.println("\nWARNING: title must be at least 1 character long; task not created\n");
+            return false;
+        }
+
+        if(!item.isDateValid()) {
+            System.out.println("\nWARNING: invalid due date; task not created\n");
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public boolean isIndexValid(int index) {
+
+        if(index < 0 || index > list.size()) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public void editTask() {
+
+        System.out.print("Which task will you edit: ");
+        int index = App.getInt();
+        String tempTitle, tempDescription, tempDate;
+
+        if(!isIndexValid(index)) {
+            return;
+        }
+
+        System.out.print("Enter a new title for task " + index + ": ");
+        tempTitle = input.nextLine();
+
+        System.out.print("Enter a new description for task " + index + ": ");
+        tempDescription = input.nextLine();
+
+        System.out.print("Enter a new task due date (YYYY-MM-DD) for task " + index + ": ");
+        tempDate = input.nextLine();
+
+        TaskItem temp = new TaskItem(tempTitle, tempDescription, tempDate, false);
+
+        if(!isTaskValid(temp)) {
+            return;
+        }
+
+        list.set(index, temp);
+
+    }
+
+    public void removeItem() {
+
+        System.out.print("Which task will you remove: ");
+        int index = App.getInt();
+
+        try {
+            list.remove(index);
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("\nWARNING: Task is not valid. Nothing to remove.\n");
+        }
 
 
-     public void editTask(int index) {
+    }
 
-         try {
+    public void markAsComplete() {
 
-             TaskItem appendTask;
-             String title;
-             String description;
-             String date;
+        System.out.println("Uncompleted Tasks");
+        System.out.println("-----------------");
 
-             appendTask = list.get(index);
+        for(int i = 0; i < list.size(); i++) {
 
-             title = getTitle();
+            if(!list.get(i).isComplete()) {
+                System.out.println(i + ") " + list.get(i).toString());
+            }
 
-             if(!isTitleValid(title)) {
-                 return;
-             }
+        }
+        System.out.println();
 
-             description = getDescription();
+        System.out.print("Which task will you mark as completed: ");
+        int index = App.getInt();
 
-             date = getDate();
+        if(!isIndexValid(index)) {
+            System.out.println("\nWARNING: Task is not valid. Nothing to mark.\n");
+            return;
+        }
 
-             if(!isDateValid(date)) {
-                 return;
-             }
+        list.get(index).setComplete(true);
 
-             appendTask.setTitle(title);
-             appendTask.setDescription(description);
-             appendTask.setDate(date);
+    }
 
-             list.set(index, appendTask);
+    public void unmarkAsComplete() {
 
-         }
+        System.out.println("Completed Tasks");
+        System.out.println("-----------------");
 
-         catch (IndexOutOfBoundsException e) {
+        for(int i = 0; i < list.size(); i++) {
 
-             System.out.println();
-             System.out.println("Warning: Index does not exist. Cannot edit task");
-             System.out.println();
+            if(list.get(i).isComplete()) {
+                System.out.println(i + ") " + list.get(i).toString());
+            }
 
-         }
+        }
+        System.out.println();
 
-     }
+        System.out.print("Which task will you un-mark as completed: ");
+        int index = App.getInt();
 
-     public void removeItem(int index) {
+        if(!isIndexValid(index)) {
+            System.out.println("\nWARNING: Task is not valid. Nothing to un-mark.\n");
+            return;
+        }
 
-         try {
+        list.get(index).setComplete(false);
 
-             list.remove(index);
-
-         }
-         catch (IndexOutOfBoundsException e) {
-
-             System.out.println();
-             System.out.println("Warning: Index does not exist. Cannot remove task");
-             System.out.println();
-
-         }
-
-     }
-
-     public void markAsComplete() {
-
-         int index;
-
-         System.out.println("Uncompleted Tasks");
-         System.out.println("-----------------");
-         for(int i = 0; i < list.size(); i++) {
-
-             if(!list.get(i).getComplete()) {
-
-                 System.out.println(i + ") " + list.get(i).toString());
-
-             }
-
-         }
-         System.out.println();
-
-         System.out.print("Which task will you mark as completed: ");
-         index = App.getInteger();
-
-         try {
-
-             list.get(index).setComplete(true);
-
-         }
-         catch (IndexOutOfBoundsException e) {
-             System.out.println();
-             System.out.println("Warning: Index does not exist. Cannot remove task");
-             System.out.println();
-         }
-
-     }
-
-     public void unMarkComplete() {
-
-         int index;
-
-         System.out.println("Completed Tasks");
-         System.out.println("---------------");
-         for(int i = 0; i < list.size(); i++) {
-
-             if(list.get(i).getComplete()) {
-
-                 System.out.println(i + ") " + list.get(i).toString());
-
-             }
-
-         }
-         System.out.println();
-
-         System.out.print("Which task will you un-mark as completed: ");
-         index = App.getInteger();
-
-         try {
-
-             list.get(index).setComplete(false);
-
-         }
-         catch (IndexOutOfBoundsException e) {
-             System.out.println();
-             System.out.println("Warning: Index does not exist. Cannot remove task");
-             System.out.println();
-         }
-
-     }
-
-     public void clearList() {
-         list.clear();
-     }
-
-     public ArrayList<TaskItem> getTaskList() {
-         return this.list;
-     }
-
-     public void setTaskList(ArrayList<TaskItem> list) {
-
-         this.list = list;
-
-     }
+    }
 
 }

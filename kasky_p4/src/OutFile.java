@@ -1,44 +1,31 @@
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
-import java.io.Writer;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class OutFile {
 
-    static Scanner input = new Scanner(System.in);
-    private String file;
+    public void outFile (TaskList list) {
 
-
-    public void getFile() {
-
-        System.out.print("Enter file name: ");
-        this.file = input.next();
-
-    }
-
-    public void writeToFile(TaskList list) {
-
-        getFile();
-        File fileName = new File(file);
+        Scanner input = new Scanner(System.in);
+        System.out.print("File Name: ");
+        String fileName = input.next();
 
         try {
 
-            FileWriter fileWriter = new FileWriter(fileName);
-            Writer output = new BufferedWriter(fileWriter);
+            FileWriter writer = new FileWriter(fileName);
 
-            for(int i = 0; i < list.getTaskList().size(); i++) {
-                output.write(list.getTaskList().get(i).toString() + " ?" + list.getTaskList().get(i).getComplete() + "\n");
+            for(int i = 0 ; i < list.getList().size(); i++) {
+                writer.write(list.getList().get(i).getDate() + "\n");
+                writer.write(list.getList().get(i).getTitle() + "\n");
+                writer.write(list.getList().get(i).getDescription() + "\n");
+                writer.write(Boolean.toString(list.getList().get(i).isComplete()) + "\n");
             }
 
-            output.close();
+            writer.close();
 
         }
-        catch(Exception e) {
-
-            System.out.println("WARNING: Cannot Create file. List not saved");
-
+        catch (IOException e) {
+            System.out.println("\nWARNING: Could not write to file\n");
         }
 
     }

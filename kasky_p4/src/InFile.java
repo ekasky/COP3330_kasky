@@ -3,120 +3,54 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.stream.StreamSupport;
 
 public class InFile {
 
-    static Scanner in = new Scanner(System.in);
-    private String fileName;
+    public void inFile(TaskList list) {
 
-    private void getFileName() {
+        Scanner in = new Scanner(System.in);
+        String fileName;
+        String line = null;
 
         System.out.print("File Name: ");
-        this.fileName = in.next();
-
-    }
-
-    public boolean readFile(TaskList list) {
-
-        int i;
-        String date = "";
-        String title = "";
-        String description = "";
-        String complete = "";
-        String inputString;
-        ArrayList<TaskItem> copyList = new ArrayList<>();
-
-        getFileName();
+        fileName = in.nextLine();
 
         try {
 
-            BufferedReader input = new BufferedReader(new FileReader(fileName));
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
-            if(!input.ready()) {
+            if(!reader.ready()) {
                 throw new IOException();
             }
 
-            while((inputString = input.readLine()) != null) {
+            ArrayList<String> tempList = new ArrayList<>();
+            ArrayList<TaskItem> newList = new ArrayList<>();
 
-                i = 0;
-                date = "";
-                title = "";
-                description = "";
-                complete = "";
-                TaskItem task = new TaskItem();
+            while((line = reader.readLine()) != null){
 
-                char[] arr = inputString.toCharArray();
-
-                while(arr[i] != ']') {
-
-                    if(!(arr[i] == '[' || arr[i] == ']')) {
-                        date += arr[i];
-                    }
-
-                    i++;
-
-                }
-
-                i++;
-
-                while(arr[i] != ':') {
-
-                    i++;
-
-                    if(!(arr[i] == ':')) {
-                        title += arr[i];
-                    }
-
-                }
-
-                i++;
-
-                while(arr[i] != '?') {
-
-                    i++;
-
-                    if(!(arr[i] == '?')) {
-                        description += arr[i];
-                    }
-
-
-
-                }
-
-                for(int j = i + 1; j < arr.length; j++) {
-
-                    complete += arr[j];
-
-                }
-
-
-                System.out.println(date);
-                System.out.println(title);
-                System.out.println(description);
-                System.out.println(complete);
-
-                task.setDate(date);
-                task.setTitle(title);
-                task.setDescription(description);
-                task.setComplete(Boolean.parseBoolean(complete));
-
-
-                copyList.add(task);
+                tempList.add(line);
 
             }
 
-            input.close();
+            reader.close();
 
-            list.setTaskList(copyList);
+
+            for(int i = 0; i < tempList.size(); i = i + 4) {
+
+                TaskItem tempItem = new TaskItem(tempList.get(i+1), tempList.get(i+2), tempList.get(i), Boolean.parseBoolean(tempList.get(i+3)));
+                newList.add(tempItem);
+
+            }
+
+            list.setList(newList);
+
 
         }
         catch (IOException e) {
-            System.out.println("WARNING: Could not read file");
-            return false;
-        }
 
-        return true;
+            System.out.println("WARNING: Could not load list");
+
+        }
 
     }
 

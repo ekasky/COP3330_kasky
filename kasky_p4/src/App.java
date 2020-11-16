@@ -8,67 +8,66 @@ public class App {
 
     public static void main(String[] args) {
 
-        App mainMenu = new App();
-        String[] mainMenuOptions = {"Create a new list", "Load an existing list", "Quit"};
-        int choice;
+        String[] mainMenuItems = {"Create a new list", "Load an existing list", "Quit"};
 
-        // Main Menu
+        int mainChoice;
+
         do {
 
-            mainMenu.menuHeader("Main Menu");
-            mainMenu.menuOptions(mainMenuOptions);
-            choice = getInteger();
+            // Main menu
+            menuHeader("Main Menu");
+            menuItems(mainMenuItems);
 
-            switch (choice) {
+            mainChoice = getInt();
+
+            switch (mainChoice) {
 
                 case 1:
+
                     listOptions();
+
                     break;
 
                 case 2:
 
                     InFile in = new InFile();
-                    boolean exists = in.readFile(list);
-
-                    if(exists == true) {
-                        listOptions();
-                    }
+                    in.inFile(list);
+                    listOptions();
 
                     break;
 
                 case 3:
-                    System.out.println("Good Bye!");
-                    break;
-
-                case 0:
-                    //Do nothing
+                    System.out.println("\nGood Bye!");
                     break;
 
                 default:
-                    System.out.println("Invalid Input");
+                    if(mainChoice != -1)
+                        System.out.println("\nInvalid Input\n");
                     break;
 
             }
 
-        } while(choice != 3);
+
+
+        } while(mainChoice != 3);
+
 
     }
 
-    //Menu Functions
-    private void menuHeader(String title) {
+    private static void menuHeader(String menuTitle) {
 
-        System.out.println(title);
-        for(int i = 0; i < title.length(); i++)
+        System.out.println(menuTitle);
+        for(int i = 0; i < menuTitle.length(); i++)
             System.out.print("-");
         System.out.println();
 
     }
 
-    private void menuOptions(String[] options) {
+    private static void menuItems(String[] items) {
 
-        for(int i = 0 ; i < options.length; i++) {
+        for(int i = 0; i < items.length; i++) {
 
-            System.out.println(i+1 + ") " + options[i]);
+            System.out.println(i+1 + ") " + items[i]);
 
         }
 
@@ -76,89 +75,92 @@ public class App {
 
     }
 
-    // Get a integer
-    public static int getInteger() {
+    public static int getInt() {
 
-        int result = 0;
+        int result;
 
         try {
+
             result = input.nextInt();
+
         }
         catch (InputMismatchException e) {
-            System.out.println("Invalid Input");
-            input.nextLine();
+            System.out.println("\nInvalid input\n");
+            input.next();
+            result = -1;
         }
 
         return result;
+
 
     }
 
     private static void listOptions() {
 
-
-        App newListMenu = new App();
-
-        String[] newListOptions = {"View the list", "Add an item", "Edit an item",
-                "Remove an item", "Mark an item as completed", "Unmark an item as completed",
-                "Save the current list", "Quit to the main menu"};
         int choice;
-        int index;
-        OutFile output = new OutFile();
+        String[] items = {"view the list", "add an item", "edit an item", "remove an item", "mark an item as completed", "unmark an item as completed", "save the current list", "quit to the main menu"};
 
         do {
 
-            newListMenu.menuHeader("List Operation Menu");
-            newListMenu.menuOptions(newListOptions);
-            choice = getInteger();
+            menuHeader("List Operation Menu");
+            menuItems(items);
+            choice = getInt();
 
-            switch (choice) {
+            switch(choice) {
 
                 case 1:
+
                     list.displayList();
+
                     break;
 
                 case 2:
-                    list.addTask();
+
+                    list.addItem();
+
                     break;
 
                 case 3:
-                    System.out.print("Task Index: ");
-                    index = getInteger();
-                    list.editTask(index);
+
+                    list.editTask();
+
                     break;
 
                 case 4:
-                    System.out.print("Task Index: ");
-                    index =  getInteger();
-                    list.removeItem(index);
+
+                    list.removeItem();
+
                     break;
 
                 case 5:
+
                     list.markAsComplete();
+
                     break;
 
                 case 6:
-                    list.unMarkComplete();
+
+                    list.unmarkAsComplete();
+
                     break;
 
                 case 7:
-                    output.writeToFile(list);
+
+                    OutFile out = new OutFile();
+
+                    out.outFile(list);
+
                     break;
 
                 case 8:
-                    list.clearList();
-                    break;
-
-                case 0:
-                    //Do nothing
+                    list.getList().clear();
                     break;
 
                 default:
-                    System.out.println("Invalid Input");
+                    System.out.println("\nInvalid Input\n");
                     break;
 
             }
-
 
         } while(choice != 8);
 
