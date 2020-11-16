@@ -13,9 +13,9 @@ public class App {
         String[] newListOptions = {"View the list", "Add an item", "Edit an item",
                 "Remove an item", "Mark an item as completed", "Unmark an item as completed",
                 "Save the current list", "Quit to the main menu"};
-        int choice = 0;
+        int choice;
         TaskList list = new TaskList();
-        int index = 0;
+        int index;
 
 
         // Main Menu

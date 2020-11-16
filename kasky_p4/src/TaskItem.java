@@ -3,6 +3,7 @@ public class TaskItem {
     private String title;
     private String description;
     private String date;
+    private boolean complete;
 
     public String getTitle() {
         return this.title;
@@ -26,6 +27,14 @@ public class TaskItem {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public boolean getComplete() {
+        return this.complete;
+    }
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
 
     @Override
