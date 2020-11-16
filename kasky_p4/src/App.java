@@ -45,7 +45,9 @@ public class App {
                                 break;
 
                             case 3:
-                                System.out.println("Placeholder 3");
+                                System.out.print("Task Index: ");
+                                int index = getInteger();
+                                list.editTask(index);
                                 break;
 
                             case 4:

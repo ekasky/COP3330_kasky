@@ -125,6 +125,51 @@ public class TaskList {
 
      }
 
+
+     public void editTask(int index) {
+
+         try {
+
+             TaskItem appendTask = new TaskItem();
+             String title = null;
+             String description = null;
+             String date = null;
+
+             appendTask = list.get(index);
+
+             title = getTitle();
+
+             if(!isTitleValid(title)) {
+                 return;
+             }
+
+             description = getDescription();
+
+             date = getDate();
+
+             if(!isDateValid(date)) {
+                 return;
+             }
+
+             appendTask.setTitle(title);
+             appendTask.setDescription(description);
+             appendTask.setDate(date);
+
+             list.set(index, appendTask);
+
+         }
+
+         catch (IndexOutOfBoundsException e) {
+
+             System.out.println();
+             System.out.println("Warning: Index does not exist. Cannot edit task");
+             System.out.println();
+             return;
+
+         }
+
+     }
+
      public void clearList() {
          list.clear();
      }
