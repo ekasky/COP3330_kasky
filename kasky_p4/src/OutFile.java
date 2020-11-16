@@ -1,25 +1,46 @@
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OutFile {
 
     static Scanner input = new Scanner(System.in);
-    private String fileName;
-    private String path;
+    private String file;
 
-    public void getFileName() {
-        System.out.print("Enter the filename to save as: ");
-        this.fileName = input.nextLine();
-    }
 
-    public void getPath() {
+    public void getFile() {
 
-        getFileName();
-        this.path = "/kasky_p4/Lists/" + fileName + ".txt";
+        System.out.print("Enter file name: ");
+        this.file = input.next();
 
     }
 
+    public void writeToFile(TaskList list) {
 
+        getFile();
+        File fileName = new File(file);
 
+        try {
+
+            FileWriter fileWriter = new FileWriter(fileName);
+            Writer output = new BufferedWriter(fileWriter);
+
+            for(int i = 0; i < list.getTaskList().size(); i++) {
+                output.write(list.getTaskList().get(i).toString() + "\n");
+            }
+
+            output.close();
+
+        }
+        catch(Exception e) {
+
+            System.out.println("WARNING: Cannot Create file. List not saved");
+
+        }
+
+    }
 
 }

@@ -260,4 +260,8 @@ public class TaskList {
          list.clear();
      }
 
+     public ArrayList<TaskItem> getTaskList() {
+         return this.list;
+     }
+
 }

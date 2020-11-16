@@ -16,6 +16,7 @@ public class App {
         int choice;
         TaskList list = new TaskList();
         int index;
+        OutFile output = new OutFile();
 
 
         // Main Menu
@@ -66,8 +67,7 @@ public class App {
                                 break;
 
                             case 7:
-                                OutFile f = new OutFile();
-                                f.getPath();
+                                output.writeToFile(list);
                                 break;
 
                             case 8:
