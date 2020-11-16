@@ -17,12 +17,13 @@ public class InFile {
 
     }
 
-    public void readFile(TaskList list) {
+    public boolean readFile(TaskList list) {
 
         int i;
         String date = "";
         String title = "";
         String description = "";
+        String complete = "";
         String inputString;
         ArrayList<TaskItem> copyList = new ArrayList<>();
 
@@ -42,6 +43,7 @@ public class InFile {
                 date = "";
                 title = "";
                 description = "";
+                complete = "";
                 TaskItem task = new TaskItem();
 
                 char[] arr = inputString.toCharArray();
@@ -68,17 +70,36 @@ public class InFile {
 
                 }
 
-
                 i++;
-                for(int j = i + 1; j < arr.length; j++) {
 
-                    description += arr[j];
+                while(arr[i] != '?') {
+
+                    i++;
+
+                    if(!(arr[i] == '?')) {
+                        description += arr[i];
+                    }
+
+
 
                 }
+
+                for(int j = i + 1; j < arr.length; j++) {
+
+                    complete += arr[j];
+
+                }
+
+
+                System.out.println(date);
+                System.out.println(title);
+                System.out.println(description);
+                System.out.println(complete);
 
                 task.setDate(date);
                 task.setTitle(title);
                 task.setDescription(description);
+                task.setComplete(Boolean.parseBoolean(complete));
 
 
                 copyList.add(task);
@@ -92,7 +113,10 @@ public class InFile {
         }
         catch (IOException e) {
             System.out.println("WARNING: Could not read file");
+            return false;
         }
+
+        return true;
 
     }
 

@@ -22,6 +22,13 @@ public class TaskList {
             return;
         }
 
+         if(description == null) {
+             System.out.println();
+             System.out.println("WARNING:  :, ], ?  are invalid symbols. Task not created");
+             System.out.println();
+             return;
+         }
+
         item.setTitle(title);
         item.setDescription(description);
         item.setDate(date);
@@ -57,6 +64,16 @@ public class TaskList {
 
          description = input.nextLine();
 
+         char[] arr = description.toCharArray();
+
+         for(int i = 0; i < arr.length; i++) {
+
+             if(arr[i] == ':' || arr[i] == ']' || arr[i] == '?') {
+                 return null;
+             }
+
+         }
+
          return description;
 
      }
@@ -81,6 +98,21 @@ public class TaskList {
              if(title.length() >= 1) {
                  valid = true;
              }
+
+             char[] arr = title.toCharArray();
+
+             for(int i = 0; i < arr.length; i++) {
+
+                 if(arr[i] == ':' || arr[i] == ']' || arr[i] == '?') {
+                     System.out.println();
+                     System.out.println("WARNING:  :, ], ?  are invalid symbols. Task not created");
+                     System.out.println();
+                     valid = false;
+
+                 }
+
+             }
+
          }
          catch (NullPointerException e) {
              System.out.println();

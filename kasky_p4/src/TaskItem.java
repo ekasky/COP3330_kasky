@@ -5,10 +5,6 @@ public class TaskItem {
     private String date;
     private boolean complete;
 
-    TaskItem() {
-        this.complete = false;
-    }
-
     public String getTitle() {
         return this.title;
     }

@@ -4,20 +4,13 @@ import java.util.Scanner;
 public class App {
 
     static Scanner input = new Scanner(System.in);
+    private static TaskList list = new TaskList();
 
     public static void main(String[] args) {
 
         App mainMenu = new App();
-        App newListMenu = new App();
         String[] mainMenuOptions = {"Create a new list", "Load an existing list", "Quit"};
-        String[] newListOptions = {"View the list", "Add an item", "Edit an item",
-                "Remove an item", "Mark an item as completed", "Unmark an item as completed",
-                "Save the current list", "Quit to the main menu"};
         int choice;
-        TaskList list = new TaskList();
-        int index;
-        OutFile output = new OutFile();
-
 
         // Main Menu
         do {
@@ -29,71 +22,17 @@ public class App {
             switch (choice) {
 
                 case 1:
-
-                    do {
-
-                        newListMenu.menuHeader("List Operation Menu");
-                        newListMenu.menuOptions(newListOptions);
-                        choice = getInteger();
-
-                        switch (choice) {
-
-                            case 1:
-                                list.displayList();
-                                break;
-
-                            case 2:
-                                list.addTask();
-                                break;
-
-                            case 3:
-                                System.out.print("Task Index: ");
-                                index = getInteger();
-                                list.editTask(index);
-                                break;
-
-                            case 4:
-                               System.out.print("Task Index: ");
-                               index =  getInteger();
-                               list.removeItem(index);
-                                break;
-
-                            case 5:
-                                list.markAsComplete();
-                                break;
-
-                            case 6:
-                                list.unMarkComplete();
-                                break;
-
-                            case 7:
-                                output.writeToFile(list);
-                                break;
-
-                            case 8:
-                                list.clearList();
-                                break;
-
-                            case 0:
-                                //Do nothing
-                                break;
-
-                            default:
-                                System.out.println("Invalid Input");
-                                break;
-
-                        }
-
-
-                    } while(choice != 8);
-
+                    listOptions();
                     break;
 
                 case 2:
 
                     InFile in = new InFile();
+                    boolean exists = in.readFile(list);
 
-                    in.readFile(list);
+                    if(exists == true) {
+                        listOptions();
+                    }
 
                     break;
 
@@ -151,6 +90,77 @@ public class App {
         }
 
         return result;
+
+    }
+
+    private static void listOptions() {
+
+
+        App newListMenu = new App();
+
+        String[] newListOptions = {"View the list", "Add an item", "Edit an item",
+                "Remove an item", "Mark an item as completed", "Unmark an item as completed",
+                "Save the current list", "Quit to the main menu"};
+        int choice;
+        int index;
+        OutFile output = new OutFile();
+
+        do {
+
+            newListMenu.menuHeader("List Operation Menu");
+            newListMenu.menuOptions(newListOptions);
+            choice = getInteger();
+
+            switch (choice) {
+
+                case 1:
+                    list.displayList();
+                    break;
+
+                case 2:
+                    list.addTask();
+                    break;
+
+                case 3:
+                    System.out.print("Task Index: ");
+                    index = getInteger();
+                    list.editTask(index);
+                    break;
+
+                case 4:
+                    System.out.print("Task Index: ");
+                    index =  getInteger();
+                    list.removeItem(index);
+                    break;
+
+                case 5:
+                    list.markAsComplete();
+                    break;
+
+                case 6:
+                    list.unMarkComplete();
+                    break;
+
+                case 7:
+                    output.writeToFile(list);
+                    break;
+
+                case 8:
+                    list.clearList();
+                    break;
+
+                case 0:
+                    //Do nothing
+                    break;
+
+                default:
+                    System.out.println("Invalid Input");
+                    break;
+
+            }
+
+
+        } while(choice != 8);
 
     }
 

@@ -29,7 +29,7 @@ public class OutFile {
             Writer output = new BufferedWriter(fileWriter);
 
             for(int i = 0; i < list.getTaskList().size(); i++) {
-                output.write(list.getTaskList().get(i).toString() + "\n");
+                output.write(list.getTaskList().get(i).toString() + " ?" + list.getTaskList().get(i).getComplete() + "\n");
             }
 
             output.close();
