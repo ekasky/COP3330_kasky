@@ -14,10 +14,7 @@ public class TaskList {
         String description = getDescription();
         String date = getDate();
 
-        if(title == null) {
-            System.out.println();
-            System.out.println("WARNING: title must be at least one character long. Task not created");
-            System.out.println();
+        if(!isTitleValid(title)) {
             return;
         }
 
@@ -73,6 +70,26 @@ public class TaskList {
          date = input.nextLine();
 
          return date;
+
+     }
+
+     private boolean isTitleValid(String title) {
+
+         boolean valid = false;
+
+         try {
+             if(title.length() >= 1) {
+                 valid = true;
+             }
+         }
+         catch (NullPointerException e) {
+             System.out.println();
+             System.out.println("WARNING: title must be at least one character long. Task not created");
+             System.out.println();
+             valid = false;
+         }
+
+         return valid;
 
      }
 
