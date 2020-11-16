@@ -90,7 +90,11 @@ public class App {
                     break;
 
                 case 2:
-                    System.out.println("Choice 2");
+
+                    InFile in = new InFile();
+
+                    in.readFile(list);
+
                     break;
 
                 case 3:

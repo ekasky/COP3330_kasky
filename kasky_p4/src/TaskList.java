@@ -33,7 +33,7 @@ public class TaskList {
 
      private String getTitle() {
 
-         String title = null;
+         String title;
 
          System.out.print("Task Title: ");
 
@@ -51,7 +51,7 @@ public class TaskList {
 
      private String getDescription() {
 
-         String description = null;
+         String description;
 
          System.out.print("Task Description: ");
 
@@ -63,7 +63,7 @@ public class TaskList {
 
      private String getDate() {
 
-         String date = null;
+         String date;
 
          System.out.print("Task due date (YYYY-MM-DD): ");
 
@@ -95,7 +95,7 @@ public class TaskList {
 
      private boolean isDateValid(String date) {
 
-         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
          try {
              formatter.parse(date);
@@ -130,10 +130,10 @@ public class TaskList {
 
          try {
 
-             TaskItem appendTask = new TaskItem();
-             String title = null;
-             String description = null;
-             String date = null;
+             TaskItem appendTask;
+             String title;
+             String description;
+             String date;
 
              appendTask = list.get(index);
 
@@ -164,7 +164,6 @@ public class TaskList {
              System.out.println();
              System.out.println("Warning: Index does not exist. Cannot edit task");
              System.out.println();
-             return;
 
          }
 
@@ -182,7 +181,6 @@ public class TaskList {
              System.out.println();
              System.out.println("Warning: Index does not exist. Cannot remove task");
              System.out.println();
-             return;
 
          }
 
@@ -217,7 +215,6 @@ public class TaskList {
              System.out.println();
              System.out.println("Warning: Index does not exist. Cannot remove task");
              System.out.println();
-             return;
          }
 
      }
@@ -251,7 +248,6 @@ public class TaskList {
              System.out.println();
              System.out.println("Warning: Index does not exist. Cannot remove task");
              System.out.println();
-             return;
          }
 
      }
@@ -262,6 +258,12 @@ public class TaskList {
 
      public ArrayList<TaskItem> getTaskList() {
          return this.list;
+     }
+
+     public void setTaskList(ArrayList<TaskItem> list) {
+
+         this.list = list;
+
      }
 
 }
