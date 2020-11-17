@@ -1,93 +1,98 @@
 import org.junit.jupiter.api.Test;
-
-import java.util.Scanner;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskItemTest {
 
-    // ****************** Failed is title Valid Test ******************
-
     @Test
-    public void isTitleValidFail() {
+    void getTitle() {
 
-        TaskItem item = new TaskItem("", "Description", "2020-02-05", false);
+        TaskItem item = new TaskItem("Task", "Description", "2020-11-16", false);
 
-        assertEquals(item.isTitleValid(), false);
-
-    }
-
-    // ****************** Successful is title Valid Test ******************
-
-    @Test
-    public void isTitleValid() {
-
-        TaskItem item = new TaskItem("Task", "Description", "2020-02-05", false);
-
-        assertEquals(item.isTitleValid(), true);
+        String title = "Task";
+        assertEquals(item.getTitle(), title);
 
     }
 
     @Test
-    public void isTitleValid2() {
+    void setTitle() {
 
-        TaskItem item = new TaskItem("1", "Description", "2020-02-05", false);
+        TaskItem item = new TaskItem("Task", "Description", "2020-11-16", false);
 
-        assertEquals(item.isTitleValid(), true);
+        String title = "Title";
+
+        item.setTitle(title);
+
+        assertEquals(item.getTitle(), title);
 
     }
 
     @Test
-    public void isTitleValid3() {
+    void getDescription() {
 
-        TaskItem item = new TaskItem("Task One", "Description", "2020-02-05", false);
+        TaskItem item = new TaskItem("Task", "Description", "2020-11-16", false);
 
-        assertEquals(item.isTitleValid(), true);
-
-    }
-
-    // ********* is Date Valid fail tests ***********
-
-    @Test
-    public void isDateValidFail() {
-
-        TaskItem item = new TaskItem("Task One", "Description", "2020-2-05", false);
-
-        assertEquals(item.isDateValid(), false);
+        assertEquals(item.getDescription(), "Description");
     }
 
     @Test
-    public void isDateValidFail2() {
+    void setDescription() {
 
-        TaskItem item = new TaskItem("Task One", "Description", "20200205", false);
+        TaskItem item = new TaskItem("Task", "Description", "2020-11-16", false);
 
-        assertEquals(item.isDateValid(), false);
+        String description = "Test Description";
+
+        item.setDescription(description);
+
+        assertEquals(item.getDescription(), description);
+
     }
 
     @Test
-    public void isDateValidFail3() {
+    void getDate() {
 
-        TaskItem item = new TaskItem("Task One", "Description", "2020/07/12", false);
+        TaskItem item = new TaskItem("Task", "Description", "2020-11-16", false);
 
-        assertEquals(item.isDateValid(), false);
-    }
+        assertEquals(item.getDate(), "2020-11-16");
 
-    // ********* is Date Valid pass tests ***********
-
-    @Test
-    public void isDateValid() {
-
-        TaskItem item = new TaskItem("Task One", "Description", "2020-02-05", false);
-
-        assertEquals(item.isDateValid(), true);
     }
 
     @Test
-    public void isDateValid2() {
+    void isComplete() {
 
-        TaskItem item = new TaskItem("Task One", "Description", "2025-02-14", false);
+        TaskItem item = new TaskItem("Task", "Description", "2020-11-16", true);
 
-        assertEquals(item.isDateValid(), true);
+        assertTrue(item.isComplete());
+
     }
 
+    @Test
+    void setComplete() {
+
+        TaskItem item = new TaskItem("Task", "Description", "2020-11-16", true);
+
+        boolean complete = false;
+
+        item.setComplete(complete);
+
+        assertFalse(item.isComplete());
+
+    }
+
+    @Test
+    void isTitleValid() {
+
+        TaskItem item = new TaskItem("Valid Title", "Description", "2020-11-16", true);
+
+        assertTrue(item.isTitleValid());
+
+    }
+
+    @Test
+    void isDateValid() {
+
+        TaskItem item = new TaskItem("Valid Title", "Description", "2020-11-16", true);
+
+        assertTrue(item.isDateValid());
+
+    }
 }

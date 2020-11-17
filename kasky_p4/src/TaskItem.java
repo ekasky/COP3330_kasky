@@ -50,11 +50,6 @@ public class TaskItem {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-
-    }
-
     public boolean isComplete() {
         return complete;
     }
@@ -82,7 +77,7 @@ public class TaskItem {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         try {
-            formatter.parse(date);
+            formatter.parse(this.date);
         }
         catch (Exception e) {
             return false;
@@ -91,6 +86,7 @@ public class TaskItem {
         return true;
 
     }
+
 
 
 }

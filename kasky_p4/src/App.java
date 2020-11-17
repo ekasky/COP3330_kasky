@@ -139,7 +139,7 @@ public class App {
                     break;
 
                 case 6:
-
+                    int index = App.getInt();
                     list.unmarkAsComplete();
 
                     break;

@@ -39,6 +39,7 @@ public class TaskList {
 
         list.add(item);
 
+
     }
 
     public static boolean isTaskValid(TaskItem item) {
@@ -107,7 +108,6 @@ public class TaskList {
         catch (IndexOutOfBoundsException e) {
             System.out.println("\nWARNING: Task is not valid. Nothing to remove.\n");
         }
-
 
     }
 
