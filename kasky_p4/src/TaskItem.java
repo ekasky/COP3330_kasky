@@ -3,90 +3,96 @@ import java.util.Scanner;
 
 public class TaskItem {
 
-    static Scanner input = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
 
     private String title;
     private String description;
     private String date;
     private boolean complete;
 
-    TaskItem() {
-
-        System.out.print("Task Title: ");
-        this.title = input.nextLine();
-
-        System.out.print("Task Description: ");
-        this.description = input.nextLine();
-
-        System.out.print("Task due date (YYYY-MM-DD): ");
-        this.date = input.nextLine();
-
-    }
-
-    TaskItem(String title, String description, String date, boolean complete) {
-        this.title = title;
-        this.description = description;
-        this.date = date;
-        this.complete = complete;
-    }
+    public TaskItem() {}
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public boolean setTitle(String title) {
+
+        if(title.length() < 1) {
+            return false;
+        }
+        else {
+            this.title = title;
+            return true;
+        }
+
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public boolean setDescription(String description) {
+
         this.description = description;
+        return true;
+
+    }
+
+    public boolean setDate(String date) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        try {
+            formatter.parse(date);
+        }
+        catch (Exception e) {
+            return false;
+        }
+
+        this.date = date;
+        return true;
+
     }
 
     public String getDate() {
         return date;
     }
 
-    public boolean isComplete() {
-        return complete;
-    }
-
     public void setComplete(boolean complete) {
         this.complete = complete;
     }
 
+    public boolean isComplete() {
+        return complete;
+    }
+
+    public boolean createItem(String title, String description, String date, boolean complete) {
+
+        boolean titleValid, dateValid;
+
+        titleValid = setTitle(title);
+        setDescription(description);
+        dateValid = setDate(date);
+        setComplete(complete);
+
+        if(titleValid == false) {
+            System.out.print("\nWARNING: Title Invalid. ");
+            return false;
+        }
+        else if(dateValid == false) {
+            System.out.print("\nWARNING: Date Invalid. ");
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+
     @Override
     public String toString() {
-        return "[" + date + "]" + " " + title + ": " + description;
-    }
-
-    public boolean isTitleValid() {
-
-        if(title.length() < 1) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public boolean isDateValid() {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        try {
-            formatter.parse(this.date);
-        }
-        catch (Exception e) {
-            return false;
-        }
-
-        return true;
+        return "[" + date + "] " + title + ": " + description;
 
     }
-
-
-
 }

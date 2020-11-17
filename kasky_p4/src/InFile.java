@@ -37,12 +37,9 @@ public class InFile {
 
             for(int i = 0; i < tempList.size(); i = i + 4) {
 
-                TaskItem tempItem = new TaskItem(tempList.get(i+1), tempList.get(i+2), tempList.get(i), Boolean.parseBoolean(tempList.get(i+3)));
-                newList.add(tempItem);
+                list.addItemToList(tempList.get(i+1), tempList.get(i+2), tempList.get(i), Boolean.parseBoolean(tempList.get(i+3)));
 
             }
-
-            list.setList(newList);
 
 
         }

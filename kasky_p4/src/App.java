@@ -1,30 +1,26 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 public class App {
 
-    static Scanner input = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
     private static TaskList list = new TaskList();
 
     public static void main(String[] args) {
 
-        String[] mainMenuItems = {"Create a new list", "Load an existing list", "Quit"};
-
-        int mainChoice;
+        int userChoice;
 
         do {
 
-            // Main menu
-            menuHeader("Main Menu");
-            menuItems(mainMenuItems);
+            menu();
+            userChoice = getInteger();
 
-            mainChoice = getInt();
-
-            switch (mainChoice) {
+            switch (userChoice) {
 
                 case 1:
 
-                    listOptions();
+                    listMenu();
 
                     break;
 
@@ -32,79 +28,79 @@ public class App {
 
                     InFile in = new InFile();
                     in.inFile(list);
-                    listOptions();
+
+                    listMenu();
 
                     break;
 
                 case 3:
-                    System.out.println("\nGood Bye!");
+
+                    System.out.println("Good Bye!");
+
                     break;
 
                 default:
-                    if(mainChoice != -1)
-                        System.out.println("\nInvalid Input\n");
+
                     break;
 
             }
 
 
-
-        } while(mainChoice != 3);
-
+        } while(userChoice != 3);
 
     }
 
-    private static void menuHeader(String menuTitle) {
+    private static void menu() {
 
-        System.out.println(menuTitle);
-        for(int i = 0; i < menuTitle.length(); i++)
-            System.out.print("-");
-        System.out.println();
-
-    }
-
-    private static void menuItems(String[] items) {
-
-        for(int i = 0; i < items.length; i++) {
-
-            System.out.println(i+1 + ") " + items[i]);
-
-        }
-
+        System.out.println("Main Menu");
+        System.out.println("----------");
+        System.out.println("1) create a new list");
+        System.out.println("2) load a list");
+        System.out.println("3) Exit");
         System.out.print("> ");
 
     }
 
-    public static int getInt() {
+    public static int getInteger() {
 
         int result;
 
         try {
 
             result = input.nextInt();
+            input.nextLine();
 
         }
         catch (InputMismatchException e) {
-            System.out.println("\nInvalid input\n");
-            input.next();
+
+            System.out.println("Not A Integer.");
             result = -1;
+
         }
 
         return result;
 
-
     }
 
-    private static void listOptions() {
+    private static void listMenu() {
 
-        int choice;
-        String[] items = {"view the list", "add an item", "edit an item", "remove an item", "mark an item as completed", "unmark an item as completed", "save the current list", "quit to the main menu"};
+        int choice, index;
+        String title, description, date;
 
         do {
 
-            menuHeader("List Operation Menu");
-            menuItems(items);
-            choice = getInt();
+            System.out.println("List Operation Menu");
+            System.out.println("-------------------");
+            System.out.println("1) view the list");
+            System.out.println("2) add an item");
+            System.out.println("3) edit an item");
+            System.out.println("4) remove an item");
+            System.out.println("5) mark an item as completed");
+            System.out.println("6) unmark an item as completed");
+            System.out.println("7) save the current list");
+            System.out.println("8) quit to the main menu");
+            System.out.print("> ");
+            choice = getInteger();
 
             switch(choice) {
 
@@ -116,38 +112,71 @@ public class App {
 
                 case 2:
 
-                    list.addItem();
+                    System.out.print("Task Title: ");
+                    title = input.nextLine();
+
+                    System.out.print("Task Description: ");
+                    description = input.nextLine();
+
+                    System.out.print("Due Date (YYYY-MM-DD): ");
+                    date = input.nextLine();
+
+                    list.addItemToList(title, description, date, false);
 
                     break;
 
                 case 3:
 
-                    list.editTask();
+                    System.out.print("Index: ");
+                    index = getInteger();
+
+                    System.out.print("Task Title: ");
+                    title = input.nextLine();
+
+                    System.out.print("Task Description: ");
+                    description = input.nextLine();
+
+                    System.out.print("Due Date (YYYY-MM-DD): ");
+                    date = input.nextLine();
+
+                    list.editItem(index, title, description, date);
 
                     break;
 
                 case 4:
 
-                    list.removeItem();
+                    System.out.print("Index: ");
+                    index = getInteger();
+
+                    list.removeItem(index);
 
                     break;
 
                 case 5:
 
-                    list.markAsComplete();
+                    list.displayUncomplete();
+
+                    System.out.print("Index: ");
+                    index = getInteger();
+
+                    list.markItemAsComplete(index);
 
                     break;
 
                 case 6:
-                    int index = App.getInt();
-                    list.unmarkAsComplete();
+
+                    list.displayComplete();
+
+                    System.out.print("Index: ");
+                    index = getInteger();
+
+                    list.unMarkAsComplete(index);
 
                     break;
 
                 case 7:
 
                     OutFile out = new OutFile();
-
                     out.outFile(list);
 
                     break;
@@ -157,7 +186,7 @@ public class App {
                     break;
 
                 default:
-                    System.out.println("\nInvalid Input\n");
+                    System.out.println("Invalid Input");
                     break;
 
             }

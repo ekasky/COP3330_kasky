@@ -1,9 +1,7 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TaskList {
 
-    static Scanner input = new Scanner(System.in);
     private ArrayList<TaskItem> list = new ArrayList<>();
 
     public ArrayList<TaskItem> getList() {
@@ -14,153 +12,182 @@ public class TaskList {
         this.list = list;
     }
 
+    public boolean addItemToList(String title, String description, String date, boolean complete) {
+
+        boolean valid;
+        TaskItem item = new TaskItem();
+        valid = item.createItem(title, description, date, complete);
+
+        if (valid) {
+            list.add(item);
+            return true;
+        } else {
+            System.out.print("Task Not Added.\n\n");
+            return false;
+        }
+
+    }
+
     public void displayList() {
 
         System.out.println("Current Tasks");
         System.out.println("-------------");
-
-        for(int i = 0; i < list.size(); i++) {
-
+        for (int i = 0; i < list.size(); i++) {
             System.out.println(i + ") " + list.get(i).toString());
-
         }
-
         System.out.println();
 
     }
 
-    public void addItem() {
-
-        TaskItem item = new TaskItem();
-
-        if(!isTaskValid(item)) {
-            return;
-        }
-
-        list.add(item);
-
-
-    }
-
-    public static boolean isTaskValid(TaskItem item) {
-
-        if(!item.isTitleValid()) {
-            System.out.println("\nWARNING: title must be at least 1 character long; task not created\n");
-            return false;
-        }
-
-        if(!item.isDateValid()) {
-            System.out.println("\nWARNING: invalid due date; task not created\n");
-            return false;
-        }
-
-        return true;
-
-    }
-
-    public boolean isIndexValid(int index) {
-
-        if(index < 0 || index > list.size()) {
-            return false;
-        }
-
-        return true;
-
-    }
-
-    public void editTask() {
-
-        System.out.print("Which task will you edit: ");
-        int index = App.getInt();
-        String tempTitle, tempDescription, tempDate;
-
-        if(!isIndexValid(index)) {
-            return;
-        }
-
-        System.out.print("Enter a new title for task " + index + ": ");
-        tempTitle = input.nextLine();
-
-        System.out.print("Enter a new description for task " + index + ": ");
-        tempDescription = input.nextLine();
-
-        System.out.print("Enter a new task due date (YYYY-MM-DD) for task " + index + ": ");
-        tempDate = input.nextLine();
-
-        TaskItem temp = new TaskItem(tempTitle, tempDescription, tempDate, false);
-
-        if(!isTaskValid(temp)) {
-            return;
-        }
-
-        list.set(index, temp);
-
-    }
-
-    public void removeItem() {
-
-        System.out.print("Which task will you remove: ");
-        int index = App.getInt();
-
-        try {
-            list.remove(index);
-        }
-        catch (IndexOutOfBoundsException e) {
-            System.out.println("\nWARNING: Task is not valid. Nothing to remove.\n");
-        }
-
-    }
-
-    public void markAsComplete() {
+    public void displayUncomplete() {
 
         System.out.println("Uncompleted Tasks");
         System.out.println("-----------------");
-
-        for(int i = 0; i < list.size(); i++) {
-
-            if(!list.get(i).isComplete()) {
+        for (int i = 0; i < list.size(); i++) {
+            if (!list.get(i).isComplete()) {
                 System.out.println(i + ") " + list.get(i).toString());
             }
-
         }
         System.out.println();
 
-        System.out.print("Which task will you mark as completed: ");
-        int index = App.getInt();
-
-        if(!isIndexValid(index)) {
-            System.out.println("\nWARNING: Task is not valid. Nothing to mark.\n");
-            return;
-        }
-
-        list.get(index).setComplete(true);
-
     }
 
-    public void unmarkAsComplete() {
+    public void displayComplete() {
 
         System.out.println("Completed Tasks");
-        System.out.println("-----------------");
-
-        for(int i = 0; i < list.size(); i++) {
-
-            if(list.get(i).isComplete()) {
+        System.out.println("---------------");
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).isComplete()) {
                 System.out.println(i + ") " + list.get(i).toString());
             }
-
         }
         System.out.println();
 
-        System.out.print("Which task will you un-mark as completed: ");
-        int index = App.getInt();
+    }
 
-        if(!isIndexValid(index)) {
-            System.out.println("\nWARNING: Task is not valid. Nothing to un-mark.\n");
-            return;
+    public boolean editItem(int index, String title, String description, String date) {
+
+        boolean validTitle, validDate;
+
+        try {
+            TaskItem item = new TaskItem();
+            validTitle = item.setTitle(title);
+            item.setDescription(description);
+            validDate = item.setDate(date);
+
+            if (validDate == false) {
+                System.out.println("WARNING: Invalid Date. Task not changed.");
+                return false;
+            }
+            else if(validTitle == false) {
+                System.out.println("WARNING: Invalid Title. Task not changed.");
+                return false;
+            }
+            else {
+
+                list.get(index).setTitle(title);
+                list.get(index).setDescription(description);
+                list.get(index).setDate(date);
+
+                return true;
+            }
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("WARNING: Invalid Index. No item to edit.");
+            return false;
         }
 
-        list.get(index).setComplete(false);
+    }
+
+    public boolean removeItem(int index) {
+
+        try {
+            list.remove(index);
+            return true;
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("WARNING: Invalid Index. No item to remove.");
+            return false;
+        }
+
 
     }
+
+    public boolean markItemAsComplete(int index) {
+
+
+        try {
+
+            list.get(index).setComplete(true);
+            return true;
+
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("WARNING: Invalid Index. No item to mark.");
+            return false;
+        }
+
+
+    }
+
+    public boolean unMarkAsComplete(int index) {
+
+        try {
+            list.get(index).setComplete(false);
+            return true;
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("WARNING: Invalid Index. No item to un-mark.");
+            return false;
+        }
+
+
+    }
+
+    public String getItemTitle(int index) {
+
+        try {
+
+            return list.get(index).getTitle();
+
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("WARNING: Invalid Index. No title to get.");
+            return null;
+        }
+
+
+    }
+
+    public String getItemDescription(int index) {
+
+        try {
+
+            return list.get(index).getDescription();
+
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("WARNING: Invalid Index. No description to get.");
+            return null;
+        }
+
+
+    }
+
+    public String getItemDate(int index) {
+
+        try {
+
+            return list.get(index).getDate();
+
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("WARNING: Invalid Index. No date to get.");
+            return null;
+        }
+
+
+    }
+
 
 }

@@ -15,9 +15,9 @@ public class OutFile {
             FileWriter writer = new FileWriter(fileName);
 
             for(int i = 0 ; i < list.getList().size(); i++) {
-                writer.write(list.getList().get(i).getDate() + "\n");
-                writer.write(list.getList().get(i).getTitle() + "\n");
-                writer.write(list.getList().get(i).getDescription() + "\n");
+                writer.write(list.getItemDate(i) + "\n");
+                writer.write(list.getItemTitle(i) + "\n");
+                writer.write(list.getItemDescription(i) + "\n");
                 writer.write(Boolean.toString(list.getList().get(i).isComplete()) + "\n");
             }
 
