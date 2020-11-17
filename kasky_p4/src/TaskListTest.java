@@ -38,4 +38,26 @@ class TaskListTest {
 
     }
 
+    @Test
+    public void editItemTitle() {
+
+        TaskItem item = new TaskItem("Task", "Description", "10-11-16", false);
+
+        item.setTitle("New Title");
+
+        assertEquals(item.getTitle(), "New Title");
+
+    }
+
+    @Test
+    public void editItemDescription() {
+
+        TaskItem item = new TaskItem("Task", "Description", "10-11-16", false);
+
+        item.setDescription("New Description");
+
+        assertEquals(item.getDescription(), "New Description");
+
+    }
+
 }
