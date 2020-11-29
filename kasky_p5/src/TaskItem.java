@@ -80,7 +80,11 @@ public class TaskItem {
         setDescription(description);
         boolean valDate = setDueDate(year, month, day);
         setComplete(false);
-        
+
     }
 
+    @Override
+    public String toString() {
+        return "[" + dueDate + "] " + title + ": " + description;
+    }
 }
