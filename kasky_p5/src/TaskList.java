@@ -54,4 +54,21 @@ public class TaskList {
 
     }
 
+
+    public boolean removeTask(int index) {
+
+        try {
+
+            list.remove(index);
+
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("WARNING: Invalid task selected. Nothing to remove.");
+            return false;
+        }
+
+        return true;
+
+    }
+
 }
