@@ -30,4 +30,16 @@ public class TaskList {
 
     }
 
+    public void printComplete() {
+
+        System.out.println("Complete Tasks");
+        System.out.println("--------------");
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i).isComplete())
+                System.out.println(i + ") " + list.get(i).toString());
+        }
+        System.out.println();
+
+    }
+
 }
