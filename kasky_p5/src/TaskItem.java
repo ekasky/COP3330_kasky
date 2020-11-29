@@ -74,12 +74,24 @@ public class TaskItem {
         this.complete = false;
     }
 
-    public void createItem(String title, String description, int year, int month, int day, boolean complete) {
+    public boolean createItem(String title, String description, int year, int month, int day, boolean complete) {
 
         boolean valTitle = setTitle(title);
         setDescription(description);
         boolean valDate = setDueDate(year, month, day);
         setComplete(false);
+
+        if(!valTitle) {
+            System.out.println("WARNING: Title must be at least 1 character long. Item not created");
+            return false;
+        }
+
+        if(!valDate) {
+            System.out.println("WARNING: Date must be formatted (YYYY-MM-DD). Item not created");
+            return false;
+        }
+
+        return true;
 
     }
 
