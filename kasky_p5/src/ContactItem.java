@@ -49,7 +49,7 @@ public class ContactItem {
 
     }
 
-    public boolean valPhone(String phoneNumber) {
+    private boolean valPhone(String phoneNumber) {
 
         try {
             MaskFormatter formatter = new MaskFormatter("(AAA)-AAA-AAAA");
@@ -75,5 +75,28 @@ public class ContactItem {
 
 
     }
-    
+
+    private boolean valEmail(String email) {
+
+        if(email.contains("@")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    public boolean setEmail(String email) {
+
+        if(valEmail(email)) {
+            this.email = email;
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
 }
