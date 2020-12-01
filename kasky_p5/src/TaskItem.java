@@ -63,12 +63,34 @@ public class TaskItem {
         return true;
     }
 
-    public void markAsComplete() {
+    public boolean markAsComplete() {
         this.complete = true;
+        return true;
     }
 
-    public void unMarkAsComplete() {
+    public boolean unMarkAsComplete() {
         this.complete = false;
+        return false;
+    }
+
+    public boolean makeItem(String title, String description, String date, boolean complete) {
+
+        boolean valTitle = setTitle(title);
+        setDescription(description);
+        boolean valDate = setDate(date);
+        this.complete = complete;
+
+        if(!valTitle) {
+            System.out.println("\nWARNING: Title must be at least one character long. Item not created\n");
+            return false;
+        }
+        else if(!valDate) {
+            System.out.println("\nWARNING: Date must be formatted YYYY-MM-DD. Item not created\n");
+            return false;
+        }
+        else
+            return true;
+
     }
 
 }
