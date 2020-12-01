@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -149,6 +146,7 @@ public class TaskList {
     public void mainMenuLoop() {
 
         int run;
+        String filename;
 
         do {
 
@@ -162,6 +160,13 @@ public class TaskList {
                     break;
 
                 case 2:
+
+                    System.out.print("Open File: ");
+                    filename = input.nextLine();
+
+                    readFile(filename);
+                    taskLoop();
+
                     break;
 
                 case 3:
@@ -283,9 +288,9 @@ public class TaskList {
             PrintWriter printWriter = new PrintWriter(fileWriter);
 
             for(int i = 0; i < list.size(); i++) {
-                printWriter.println(list.get(i).getDate());
                 printWriter.println(list.get(i).getTitle());
                 printWriter.println(list.get(i).getDescription());
+                printWriter.println(list.get(i).getDate());
                 printWriter.println(list.get(i).isComplete());
             }
 
@@ -294,6 +299,38 @@ public class TaskList {
 
         }
         catch (IOException e) {
+            return false;
+        }
+
+    }
+
+    private boolean readFile(String filename) {
+
+        String title, description, date, complete;
+
+        String path = filename + ".txt";
+
+        try {
+
+            File file = new File(path);
+            Scanner reader = new Scanner(file);
+
+            while(reader.hasNextLine()) {
+
+                title = reader.nextLine();
+                description = reader.nextLine();
+                date = reader.nextLine();
+                complete = reader.nextLine();
+
+                addTask(title, description, date, Boolean.parseBoolean(complete));
+
+            }
+
+            return true;
+
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("\nWARNING: Could not open file.\n");
             return false;
         }
 
