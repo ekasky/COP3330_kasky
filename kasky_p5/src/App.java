@@ -7,7 +7,14 @@ public class App {
 
     public static void main(String[] args) {
 
+        int  run;
 
+        do {
+
+            applicationMenu();
+            run = getInteger();
+
+        } while(run != 3);
 
     }
 
@@ -19,8 +26,6 @@ public class App {
         System.out.println("3. Quit");
         System.out.print("> ");
     }
-
-
 
     public static int getInteger() {
 
