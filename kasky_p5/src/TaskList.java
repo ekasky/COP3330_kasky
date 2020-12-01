@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,7 +36,7 @@ public class TaskList {
     private void taskLoop() {
 
         int run, index;
-        String title, description, date;
+        String title, description, date, filename;
 
         do {
 
@@ -120,6 +124,12 @@ public class TaskList {
                     break;
 
                 case 7:
+
+                    System.out.print("Save As: ");
+                    filename = input.nextLine();
+
+                    writeToFile(filename);
+
                     break;
 
                 case 8:
@@ -258,6 +268,33 @@ public class TaskList {
         else {
             list.remove(index);
             return true;
+        }
+
+    }
+
+    private boolean writeToFile(String filename) {
+
+        String path = filename + ".txt";
+
+        try {
+
+            File file = new File(path);
+            FileWriter fileWriter = new FileWriter(file);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+
+            for(int i = 0; i < list.size(); i++) {
+                printWriter.println(list.get(i).getDate());
+                printWriter.println(list.get(i).getTitle());
+                printWriter.println(list.get(i).getDescription());
+                printWriter.println(list.get(i).isComplete());
+            }
+
+            printWriter.close();
+            return true;
+
+        }
+        catch (IOException e) {
+            return false;
         }
 
     }
