@@ -101,4 +101,19 @@ public class TaskList {
 
     }
 
+    private boolean addTask(String title, String description, String date, boolean complete) {
+
+        TaskItem item = new TaskItem();
+
+        boolean val = item.makeItem(title, description, date, complete);
+
+        if(val)
+            list.add(item);
+        else
+            return false;
+
+        return true;
+
+    }
+
 }
