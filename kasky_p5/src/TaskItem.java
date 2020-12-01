@@ -53,4 +53,13 @@ public class TaskItem {
         return true;
     }
 
+    public boolean setDate(String date) {
+        if(valDate(date))
+            this.date = date;
+        else
+            return false;
+
+        return true;
+    }
+
 }
