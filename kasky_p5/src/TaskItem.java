@@ -1,3 +1,6 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class TaskItem {
 
     private String title;
@@ -34,6 +37,20 @@ public class TaskItem {
 
     private void setDescription(String description) {
         this.description = description;
+    }
+
+    private boolean valDate(String date) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        try {
+            formatter.parse(date);
+        }
+        catch (DateTimeParseException e) {
+            return false;
+        }
+
+        return true;
     }
 
 }
