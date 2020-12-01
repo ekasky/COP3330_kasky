@@ -99,4 +99,24 @@ public class ContactItem {
 
     }
 
+    public boolean makeContact(String firstName, String lastName, String phoneNumber, String email) {
+
+        boolean valFN = setFirstName(firstName);
+        boolean valLN = setLastName(lastName);
+        boolean valPhone = setPhoneNumber(phoneNumber);
+        boolean valEmail = setEmail(email);
+
+        if(!(valFN && valLN && valPhone && valEmail)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + firstName + lastName + "\nPhone: " + phoneNumber + "\nEmail: " + email;
+    }
 }
