@@ -34,6 +34,18 @@ public class ContactItem {
 
     }
 
+    public boolean setLastName(String lastName) {
+
+        if(lastName.length() > 1) {
+            this.lastName = lastName;
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
 
 
 }
