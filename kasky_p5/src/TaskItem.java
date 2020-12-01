@@ -93,4 +93,8 @@ public class TaskItem {
 
     }
 
+    @Override
+    public String toString() {
+        return "[" + date + "] " + title + ": " + description;
+    }
 }
