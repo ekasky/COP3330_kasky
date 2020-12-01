@@ -54,12 +54,21 @@ public class TaskItem {
     }
 
     public boolean setDate(String date) {
+
         if(valDate(date))
             this.date = date;
         else
             return false;
 
         return true;
+    }
+
+    public void markAsComplete() {
+        this.complete = true;
+    }
+
+    public void unMarkAsComplete() {
+        this.complete = false;
     }
 
 }
