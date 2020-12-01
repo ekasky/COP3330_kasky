@@ -150,4 +150,17 @@ public class TaskList {
 
     }
 
+    private boolean valIndex(int index) {
+
+        try {
+            list.get(index);
+        }
+        catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+
+        return true;
+
+    }
+
 }
