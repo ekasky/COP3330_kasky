@@ -9,7 +9,20 @@ public class TaskList {
         System.out.print("> ");
     }
 
-    public static void mainMenuLoop() {
+    private static void taskMenu() {
+        System.out.println("List Operation Menu");
+        System.out.println("-------------------");
+        System.out.println("1. View the List");
+        System.out.println("2. Add a item");
+        System.out.println("3. Edit a item");
+        System.out.println("4. Remove a item");
+        System.out.println("5. Mark an item as complete");
+        System.out.println("6. Un-mark am item as complete");
+        System.out.println("7. Save the current list");
+        System.out.println("8. Quit to main menu");
+    }
+    
+    public void mainMenuLoop() {
 
         int run;
 
