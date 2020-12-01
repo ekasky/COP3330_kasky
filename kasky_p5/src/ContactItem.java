@@ -1,3 +1,6 @@
+import javax.swing.text.MaskFormatter;
+import java.text.ParseException;
+
 public class ContactItem {
 
     private String firstName;
@@ -46,6 +49,31 @@ public class ContactItem {
 
     }
 
+    public boolean valPhone(String phoneNumber) {
+
+        try {
+            MaskFormatter formatter = new MaskFormatter("(AAA)-AAA-AAAA");
+            formatter.valueToString(phoneNumber);
+            return true;
+        }
+        catch (ParseException e) {
+            return false;
+        }
+
+    }
+
+    public boolean setPhoneNumber(String phoneNumber) {
+
+        if(valPhone(phoneNumber)) {
+            this.phoneNumber = phoneNumber;
+            System.out.println(phoneNumber);
+            return true;
+        }
+        else {
+            return false;
+        }
 
 
+    }
+    
 }
