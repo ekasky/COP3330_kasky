@@ -1,7 +1,9 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TaskList {
 
+    private Scanner input = new Scanner(System.in);
     private ArrayList<TaskItem> list = new ArrayList<>();
 
     private static void mainMenu() {
@@ -28,7 +30,8 @@ public class TaskList {
 
     private void taskLoop() {
 
-        int run;
+        int run, index;
+        String title, description, date;
 
         do {
 
@@ -38,21 +41,70 @@ public class TaskList {
             switch (run) {
 
                 case 1:
+                    printList();
                     break;
 
                 case 2:
+
+                    System.out.print("Task Title: ");
+                    title = input.nextLine();
+
+                    System.out.print("Task Description: ");
+                    description = input.nextLine();
+
+                    System.out.print("Due Date (YYYY-MM-DD): ");
+                    date = input.nextLine();
+
+                    addTask(title, description, date, false);
+
                     break;
 
                 case 3:
+
+                    System.out.print("Edit task: ");
+                    index = App.getInteger();
+
+                    System.out.print("Enter a new title for task " + index + ": ");
+                    title = input.nextLine();
+
+                    System.out.print("Enter a new description for task " + index + ": ");
+                    description = input.nextLine();
+
+                    System.out.print("Enter a new due date (YYYY-MM-DD) for task " + index + ": ");
+                    date = input.nextLine();
+
+                    editItem(index, title, description, date);
+
                     break;
 
                 case 4:
+
+                    System.out.print("Remove task: ");
+                    index = App.getInteger();
+
+                    deleteItem(index);
+
                     break;
 
                 case 5:
+
+                    printUnComplete();
+
+                    System.out.print("Task to mark: ");
+                    index = App.getInteger();
+
+                    list.get(index).markAsComplete();
+
                     break;
 
                 case 6:
+
+                    printComplete();
+                    System.out.print("Task to un-mark: ");
+                    index = App.getInteger();
+
+                    list.get(index).unMarkAsComplete();
+
                     break;
 
                 case 7:
@@ -83,6 +135,7 @@ public class TaskList {
             switch (run) {
 
                 case 1:
+                    taskLoop();
                     break;
 
                 case 2:
