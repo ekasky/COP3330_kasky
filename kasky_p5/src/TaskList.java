@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+
 public class TaskList {
+
+    private ArrayList<TaskItem> list = new ArrayList<>();
 
     private static void mainMenu() {
         System.out.println("Main Menu");
