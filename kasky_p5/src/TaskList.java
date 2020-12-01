@@ -183,4 +183,17 @@ public class TaskList {
 
     }
 
+    private boolean deleteItem(int index) {
+
+        if(!valIndex(index)) {
+            System.out.println("\nWARNING: Invalid item. Nothing to delete\n");
+            return false;
+        }
+        else {
+            list.remove(index);
+            return true;
+        }
+
+    }
+
 }
