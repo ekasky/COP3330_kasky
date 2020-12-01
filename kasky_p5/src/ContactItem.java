@@ -60,7 +60,6 @@ public class ContactItem {
         try {
             MaskFormatter formatter = new MaskFormatter("###-###-####");
             formatter.valueToString(phoneNumber);
-            System.out.println("WRONG");
             return true;
         } catch (ParseException e) {
             System.out.println("\nWARNING: Phone number must be formatted XXX-XXX-XXXX. Phone number not added.\n");

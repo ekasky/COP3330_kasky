@@ -67,7 +67,7 @@ public class ContactList extends ListTemplate {
 
         }
         else {
-            System.out.println("\nWARNING: Invalid Contact. Noting to edit.\n");
+            System.out.println("\nWARNING: Invalid Contact. Nothing to edit.\n");
             return false;
         }
 
