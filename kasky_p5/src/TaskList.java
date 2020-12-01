@@ -163,4 +163,24 @@ public class TaskList {
 
     }
 
+    private boolean editItem(int index, String title, String description, String date) {
+
+        if(!valIndex(index)) {
+            System.out.println("\nWARNING: Invalid item. Nothing to edit\n");
+            return false;
+        }
+
+        TaskItem item = new TaskItem();
+
+        boolean val = item.makeItem(title, description, date, list.get(index).isComplete());
+
+        if(val)
+            list.set(index, item);
+        else
+            return false;
+
+        return true;
+
+    }
+
 }
