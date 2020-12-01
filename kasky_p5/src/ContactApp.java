@@ -53,20 +53,14 @@ public class ContactApp {
 
                 case 6:
                     break;
-
-                case 7:
-                    break;
-
-                case 8:
-                    break;
-
+                    
                 default:
                     System.out.println("\nWARNING: NOT A VALID CHOICE\n");
                     break;
 
             }
 
-        } while(run != 8);
+        } while(run != 6);
 
     }
 

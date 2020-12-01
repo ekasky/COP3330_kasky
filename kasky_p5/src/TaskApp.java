@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TaskApp extends TaskList{
+public class TaskApp extends TaskList {
 
     private static void mainMenu() {
         System.out.println("Main Menu");
@@ -161,8 +161,10 @@ public class TaskApp extends TaskList{
                     System.out.print("Open File: ");
                     filename = input.nextLine();
 
-                    readFile(filename);
-                    taskLoop();
+                    boolean val = readFile(filename);
+
+                    if(val)
+                        taskLoop();
 
                     break;
 

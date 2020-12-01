@@ -9,6 +9,7 @@ public class App {
 
         int  run;
         TaskApp taskApp = new TaskApp();
+        ContactApp contactApp = new ContactApp();
 
         do {
 
@@ -22,6 +23,7 @@ public class App {
                     break;
 
                 case 2:
+                    contactApp.mainLoop();
                     break;
 
                 case 3:
