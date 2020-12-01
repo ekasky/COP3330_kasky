@@ -21,4 +21,15 @@ public class TaskItem {
         return complete;
     }
 
+    public boolean setTitle(String title) {
+
+        if(title.length() < 1)
+            return false;
+        else
+            this.title = title;
+
+        return true;
+
+    }
+
 }
