@@ -70,4 +70,37 @@ public class ContactApp {
 
     }
 
+    public void mainLoop() {
+
+        int run;
+
+        do {
+
+            mainMenu();
+            run = App.getInteger();
+
+            switch (run) {
+
+                case 1:
+                    contactLoop();
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3:
+
+                    break;
+
+                default:
+                    System.out.println("\nWARNING: NOT A VALID CHOICE\n");
+                    break;
+
+            }
+
+        } while(run != 3);
+
+    }
+
 }
