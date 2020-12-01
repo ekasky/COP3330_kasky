@@ -14,6 +14,23 @@ public class App {
             applicationMenu();
             run = getInteger();
 
+            switch (run) {
+
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+
+                case 3:
+                    System.out.println("\nGood Bye!\n");
+                    break;
+
+                default:
+                    System.out.println("\nWARNING: NOT A VALID CHOICE\n");
+
+            }
+
         } while(run != 3);
 
     }
