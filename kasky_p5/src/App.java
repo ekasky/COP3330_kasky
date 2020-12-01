@@ -8,6 +8,7 @@ public class App {
     public static void main(String[] args) {
 
         int  run;
+        TaskList list = new TaskList();
 
         do {
 
@@ -17,6 +18,7 @@ public class App {
             switch (run) {
 
                 case 1:
+                    list.mainMenuLoop();
                     break;
 
                 case 2:
