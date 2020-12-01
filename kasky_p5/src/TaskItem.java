@@ -21,7 +21,7 @@ public class TaskItem {
         return complete;
     }
 
-    public boolean setTitle(String title) {
+    private boolean setTitle(String title) {
 
         if(title.length() < 1)
             return false;
@@ -30,6 +30,10 @@ public class TaskItem {
 
         return true;
 
+    }
+
+    private void setDescription(String description) {
+        this.description = description;
     }
 
 }
