@@ -21,6 +21,19 @@ public class ContactItem {
         return email;
     }
 
+    public boolean setFirstName(String firstName) {
+
+
+        if(firstName.length() > 1) {
+            this.firstName = firstName;
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
 
 
 }
