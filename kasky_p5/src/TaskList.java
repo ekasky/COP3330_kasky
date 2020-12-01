@@ -26,6 +26,7 @@ public class TaskList {
         System.out.println("6. Un-mark am item as complete");
         System.out.println("7. Save the current list");
         System.out.println("8. Quit to main menu");
+        System.out.print("> ");
     }
 
     private void taskLoop() {
@@ -90,20 +91,31 @@ public class TaskList {
 
                     printUnComplete();
 
-                    System.out.print("Task to mark: ");
+                    System.out.print("Task to mark (-1 to cancel): ");
                     index = App.getInteger();
 
-                    list.get(index).markAsComplete();
+                    if(!valIndex(index)) {
+                        if (index != -1)
+                            System.out.println("\nWARNING: Invalid item. nothing to mark\n");
+                    }
+                    else
+                        list.get(index).markAsComplete();
 
                     break;
 
                 case 6:
 
                     printComplete();
-                    System.out.print("Task to un-mark: ");
+                    System.out.print("Task to un-mark (-1 to cancel): ");
                     index = App.getInteger();
 
-                    list.get(index).unMarkAsComplete();
+                    if(!valIndex(index)) {
+                        if (index != -1)
+                            System.out.println("\nWARNING: Invalid item. nothing to un-mark\n");
+                    }
+                    else
+                        list.get(index).unMarkAsComplete();
+
 
                     break;
 
@@ -111,6 +123,7 @@ public class TaskList {
                     break;
 
                 case 8:
+                    list.clear();
                     break;
 
                 default:
