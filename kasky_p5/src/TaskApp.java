@@ -1,19 +1,25 @@
-import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TaskApp extends TaskList {
+public class TaskApp extends App {
 
-    private static void mainMenu() {
+    private TaskList list = new TaskList();
+    private Scanner input = new Scanner(System.in);
+
+    @Override
+    public void printMainMenu() {
+
         System.out.println("Main Menu");
         System.out.println("---------");
         System.out.println("1. Create a new list");
         System.out.println("2. Load a existing list");
         System.out.println("3. Quit");
         System.out.print("> ");
+
     }
 
-    private static void taskMenu() {
+    @Override
+    public void printListMenu() {
+
         System.out.println("List Operation Menu");
         System.out.println("-------------------");
         System.out.println("1. View the List");
@@ -21,26 +27,71 @@ public class TaskApp extends TaskList {
         System.out.println("3. Edit a item");
         System.out.println("4. Remove a item");
         System.out.println("5. Mark an item as complete");
-        System.out.println("6. Un-mark am item as complete");
+        System.out.println("6. Un-mark a item as complete");
         System.out.println("7. Save the current list");
         System.out.println("8. Quit to main menu");
         System.out.print("> ");
+
     }
 
-    private void taskLoop() {
+    @Override
+    public void mainLoop() {
+
+        int run;
+        String filename;
+
+        do {
+
+            printMainMenu();
+            run = getInteger();
+
+            switch (run) {
+
+                case 1:
+                    listLoop();
+                    break;
+
+                case 2:
+
+                    System.out.print("Open: ");
+                    filename = input.nextLine();
+
+                    boolean val = list.loadList(filename);
+
+                    if(val)
+                        listLoop();
+
+                    break;
+
+                case 3:
+                        //Return to application menu
+                    break;
+
+                default:
+                    System.out.println("\nWARNING: Not a valid choice.\n");
+                    break;
+
+            }
+
+        } while(run != 3);
+
+    }
+
+    @Override
+    public void listLoop() {
 
         int run, index;
         String title, description, date, filename;
 
         do {
 
-            taskMenu();
-            run = App.getInteger();
+            printListMenu();
+            run = getInteger();
 
             switch (run) {
 
                 case 1:
-                    printList();
+                    list.printList();
                     break;
 
                 case 2:
@@ -51,69 +102,69 @@ public class TaskApp extends TaskList {
                     System.out.print("Task Description: ");
                     description = input.nextLine();
 
-                    System.out.print("Due Date (YYYY-MM-DD): ");
+                    System.out.print("Due date (YYYY-MM-DD): ");
                     date = input.nextLine();
 
-                    addTask(title, description, date, false);
+                    list.addTask(title, description, date, false);
 
                     break;
 
                 case 3:
 
-                    System.out.print("Edit task: ");
-                    index = App.getInteger();
+                    System.out.print("Edit Task: ");
+                    index = getInteger();
 
-                    System.out.print("Enter a new title for task " + index + ": ");
+                    System.out.print("New Title for task " + index + ": ");
                     title = input.nextLine();
 
-                    System.out.print("Enter a new description for task " + index + ": ");
+                    System.out.print("New Description for task " + index + ": ");
                     description = input.nextLine();
 
-                    System.out.print("Enter a new due date (YYYY-MM-DD) for task " + index + ": ");
+                    System.out.print("New Due Date (YYYY-MM-DD) for task " + index + ": ");
                     date = input.nextLine();
 
-                    editItem(index, title, description, date);
+                    list.editItem(index, title, description, date);
 
                     break;
 
                 case 4:
 
-                    System.out.print("Remove task: ");
-                    index = App.getInteger();
+                    System.out.println("Remove Task: ");
+                    index = getInteger();
 
-                    deleteItem(index);
+                    list.removeItem(index);
 
                     break;
 
                 case 5:
 
-                    printUnComplete();
+                    list.printUnComplete();
 
-                    System.out.print("Task to mark (-1 to cancel): ");
-                    index = App.getInteger();
+                    System.out.print("(-1 to cancel) > ");
+                    index = getInteger();
 
-                    if(!valIndex(index)) {
-                        if (index != -1)
+                    if(!list.valIndex(index)) {
+                        if(index != -1)
                             System.out.println("\nWARNING: Invalid item. nothing to mark\n");
                     }
                     else
-                        list.get(index).markAsComplete();
+                        list.getList().get(index).markAsComplete();
 
                     break;
 
                 case 6:
 
-                    printComplete();
-                    System.out.print("Task to un-mark (-1 to cancel): ");
-                    index = App.getInteger();
+                    list.printComplete();
 
-                    if(!valIndex(index)) {
-                        if (index != -1)
+                    System.out.print("(-1 to cancel) > ");
+                    index = getInteger();
+
+                    if(!list.valIndex(index)) {
+                        if(index != -1)
                             System.out.println("\nWARNING: Invalid item. nothing to un-mark\n");
                     }
                     else
-                        list.get(index).unMarkAsComplete();
-
+                        list.getList().get(index).UnMarkAsComplete();
 
                     break;
 
@@ -122,16 +173,16 @@ public class TaskApp extends TaskList {
                     System.out.print("Save As: ");
                     filename = input.nextLine();
 
-                    writeToFile(filename);
+                    list.saveList(filename);
 
                     break;
 
                 case 8:
-                    list.clear();
+                    list.getList().clear();
                     break;
 
                 default:
-                    System.out.println("\nWARNING: NOT A VALID CHOICE\n");
+                    System.out.println("\nWARNING: Not a valid choice.\n");
                     break;
 
             }
@@ -139,46 +190,4 @@ public class TaskApp extends TaskList {
         } while(run != 8);
 
     }
-
-    public void mainMenuLoop() {
-
-        int run;
-        String filename;
-
-        do {
-
-            mainMenu();
-            run = App.getInteger();
-
-            switch (run) {
-
-                case 1:
-                    taskLoop();
-                    break;
-
-                case 2:
-
-                    System.out.print("Open File: ");
-                    filename = input.nextLine();
-
-                    boolean val = readFile(filename);
-
-                    if(val)
-                        taskLoop();
-
-                    break;
-
-                case 3:
-                    break;
-
-                default:
-                    System.out.println("\nWARNING: NOT A VALID CHOICE\n");
-                    break;
-
-            }
-
-        } while(run != 3);
-
-    }
-
 }

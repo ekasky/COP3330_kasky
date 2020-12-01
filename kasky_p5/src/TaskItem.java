@@ -1,5 +1,6 @@
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 public class TaskItem {
 
@@ -26,11 +27,11 @@ public class TaskItem {
 
     private boolean setTitle(String title) {
 
-        if(title.length() < 1)
+        if(title.length() < 1) {
             return false;
-        else
-            this.title = title;
+        }
 
+        this.title = title;
         return true;
 
     }
@@ -51,9 +52,10 @@ public class TaskItem {
         }
 
         return true;
+
     }
 
-    public boolean setDate(String date) {
+    private boolean setDate(String date) {
 
         if(valDate(date))
             this.date = date;
@@ -61,16 +63,17 @@ public class TaskItem {
             return false;
 
         return true;
+
     }
 
     public boolean markAsComplete() {
         this.complete = true;
-        return true;
+        return isComplete();
     }
 
-    public boolean unMarkAsComplete() {
+    public boolean UnMarkAsComplete() {
         this.complete = false;
-        return false;
+        return isComplete();
     }
 
     public boolean makeItem(String title, String description, String date, boolean complete) {
@@ -97,4 +100,5 @@ public class TaskItem {
     public String toString() {
         return "[" + date + "] " + title + ": " + description;
     }
+
 }

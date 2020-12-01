@@ -2,10 +2,37 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TaskList {
+public class TaskList extends ListTemplate {
 
-    public Scanner input = new Scanner(System.in);
-    public ArrayList<TaskItem> list = new ArrayList<>();
+    private ArrayList<TaskItem> list = new ArrayList<>();
+
+    public ArrayList<TaskItem> getList() {
+        return list;
+    }
+
+    @Override
+    public boolean valIndex(int index) {
+
+        try {
+            list.get(index);
+            return true;
+        }
+        catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+
+    }
+
+    @Override
+    public void printList() {
+
+        System.out.println("Current List");
+        System.out.println("------------");
+        for(int i = 0; i < list.size(); i++)
+            System.out.println(i + ") " + list.get(i).toString());
+        System.out.println();
+
+    }
 
     public boolean addTask(String title, String description, String date, boolean complete) {
 
@@ -17,53 +44,6 @@ public class TaskList {
             list.add(item);
         else
             return false;
-
-        return true;
-
-    }
-
-    public void printList() {
-
-        System.out.println("Current List");
-        System.out.println("------------");
-        for(int i = 0; i < list.size(); i++)
-            System.out.println(i + ") " + list.get(i).toString());
-        System.out.println();
-
-    }
-
-    public void printComplete() {
-
-        System.out.println("Complete List");
-        System.out.println("-------------");
-        for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).isComplete())
-                System.out.println(i + ") " + list.get(i).toString());
-        }
-        System.out.println();
-
-    }
-
-    public void printUnComplete() {
-
-        System.out.println("Un-Complete List");
-        System.out.println("----------------");
-        for(int i = 0; i < list.size(); i++) {
-            if(!list.get(i).isComplete())
-                System.out.println(i + ") " + list.get(i).toString());
-        }
-        System.out.println();
-
-    }
-
-    public boolean valIndex(int index) {
-
-        try {
-            list.get(index);
-        }
-        catch (IndexOutOfBoundsException e) {
-            return false;
-        }
 
         return true;
 
@@ -89,20 +69,48 @@ public class TaskList {
 
     }
 
-    public boolean deleteItem(int index) {
+    public void printComplete() {
 
-        if(!valIndex(index)) {
-            System.out.println("\nWARNING: Invalid item. Nothing to delete\n");
-            return false;
+        System.out.println("Complete List");
+        System.out.println("-------------");
+        for(int i = 0; i < list.size(); i++) {
+
+            if(list.get(i).isComplete())
+                System.out.println(i + ") " + list.get(i).toString());
+
         }
-        else {
+        System.out.println();
+
+    }
+
+    public void printUnComplete() {
+        System.out.println("Un-Complete List");
+        System.out.println("----------------");
+        for(int i = 0; i < list.size(); i++) {
+
+            if(!list.get(i).isComplete())
+                System.out.println(i + ") " + list.get(i).toString());
+
+        }
+        System.out.println();
+    }
+
+    @Override
+    public boolean removeItem(int index) {
+
+        if(valIndex(index)) {
             list.remove(index);
             return true;
+        }
+        else {
+            System.out.println("\nWARNING: Invalid Task. Nothing to remove.\n");
+            return false;
         }
 
     }
 
-    public boolean writeToFile(String filename) {
+    @Override
+    public boolean saveList(String filename) {
 
         String path = filename + ".txt";
 
@@ -113,10 +121,12 @@ public class TaskList {
             PrintWriter printWriter = new PrintWriter(fileWriter);
 
             for(int i = 0; i < list.size(); i++) {
+
                 printWriter.println(list.get(i).getTitle());
                 printWriter.println(list.get(i).getDescription());
                 printWriter.println(list.get(i).getDate());
                 printWriter.println(list.get(i).isComplete());
+
             }
 
             printWriter.close();
@@ -129,7 +139,8 @@ public class TaskList {
 
     }
 
-    public boolean readFile(String filename) {
+    @Override
+    public boolean loadList(String filename) {
 
         String title, description, date, complete;
 

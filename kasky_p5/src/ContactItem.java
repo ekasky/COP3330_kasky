@@ -8,6 +8,13 @@ public class ContactItem {
     private String phoneNumber;
     private String email;
 
+    ContactItem() {
+        firstName = " ";
+        lastName = " ";
+        phoneNumber = " ";
+        email = " ";
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -24,61 +31,53 @@ public class ContactItem {
         return email;
     }
 
-    public boolean setFirstName(String firstName) {
+    private boolean setFirstName(String firstName) {
 
-
-        if(firstName.length() > 1) {
-            this.firstName = firstName;
-            return true;
-        }
-        else {
+        if (firstName.length() < 1) {
+            System.out.println("No First Name Set");
             return false;
         }
 
+        this.firstName = firstName;
+        return true;
+
     }
 
-    public boolean setLastName(String lastName) {
+    private boolean setLastName(String lastName) {
 
-        if(lastName.length() > 1) {
-            this.lastName = lastName;
-            return true;
-        }
-        else {
+        if (lastName.length() < 1) {
+            System.out.println("No Last Name Set");
             return false;
         }
 
+        this.lastName = lastName;
+        return true;
+
     }
 
-    private boolean valPhone(String phoneNumber) {
+    private boolean valPhoneNumber(String phoneNumber) {
 
         try {
-            MaskFormatter formatter = new MaskFormatter("(AAA)-AAA-AAAA");
+            MaskFormatter formatter = new MaskFormatter("###-###-####");
             formatter.valueToString(phoneNumber);
+            System.out.println("WRONG");
             return true;
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
+            System.out.println("\nWARNING: Phone number must be formatted XXX-XXX-XXXX. Phone number not added.\n");
             return false;
         }
 
     }
 
-    public boolean setPhoneNumber(String phoneNumber) {
+    private boolean setPhoneNumber(String phoneNumber) {
 
-        if(valPhone(phoneNumber)) {
+        if (phoneNumber.length() < 1) {
+            System.out.println("No Phone Number Added");
+            return false;
+        }
+
+        if (valPhoneNumber(phoneNumber)) {
             this.phoneNumber = phoneNumber;
-            System.out.println(phoneNumber);
-            return true;
-        }
-        else {
-            return false;
-        }
-
-
-    }
-
-    private boolean valEmail(String email) {
-
-        if(email.contains("@")) {
             return true;
         }
         else {
@@ -87,36 +86,36 @@ public class ContactItem {
 
     }
 
-    public boolean setEmail(String email) {
+    private boolean setEmail(String email) {
 
-        if(valEmail(email)) {
-            this.email = email;
-            return true;
-        }
-        else {
+        if(email.length() < 1) {
+            System.out.println("No Email Set");
             return false;
         }
 
+        this.email = email;
+        return true;
+
     }
 
-    public boolean makeContact(String firstName, String lastName, String phoneNumber, String email) {
+    public boolean createContact(String firstName, String lastName, String phoneNumber, String email) {
 
         boolean valFN = setFirstName(firstName);
         boolean valLN = setLastName(lastName);
         boolean valPhone = setPhoneNumber(phoneNumber);
         boolean valEmail = setEmail(email);
 
-        if(!(valFN && valLN && valPhone && valEmail)) {
+        if(!valFN && !valLN && !valPhone && !valEmail) {
+            System.out.println("\nWARNING: At least on field must be completed. Contact no created.\n");
             return false;
         }
-        else {
-            return true;
-        }
+
+        return true;
 
     }
 
     @Override
     public String toString() {
-        return "Name: " + firstName + lastName + "\nPhone: " + phoneNumber + "\nEmail: " + email;
+        return "Name: " + firstName + " " + lastName + "\nPhone: " + phoneNumber + "\nEmail: " + email;
     }
 }
