@@ -21,7 +21,52 @@ public class TaskList {
         System.out.println("7. Save the current list");
         System.out.println("8. Quit to main menu");
     }
-    
+
+    private void taskLoop() {
+
+        int run;
+
+        do {
+
+            taskMenu();
+            run = App.getInteger();
+
+            switch (run) {
+
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+
+                case 3:
+                    break;
+
+                case 4:
+                    break;
+
+                case 5:
+                    break;
+
+                case 6:
+                    break;
+
+                case 7:
+                    break;
+
+                case 8:
+                    break;
+
+                default:
+                    System.out.println("\nWARNING: NOT A VALID CHOICE\n");
+                    break;
+
+            }
+
+        } while(run != 8);
+
+    }
+
     public void mainMenuLoop() {
 
         int run;
